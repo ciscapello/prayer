@@ -1,5 +1,5 @@
 import * as React from 'react';
-import RootNavigation from './src/navigate/rootNavigation';
+import RootNavigation from './src/navigation/rootNavigation';
 import {Provider} from 'react-redux';
 import store from './src/store';
 

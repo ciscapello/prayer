@@ -12,8 +12,8 @@ import {
   View,
 } from 'react-native';
 import {useAppDispatch} from '../../hooks';
-import {LoginStackParams} from '../../navigate/loginNavigation';
-import {signUpFetch} from '../../store/user';
+import {LoginStackParams} from '../../navigation/loginNavigation';
+import {signUpFetch} from '../../store';
 
 export interface SignUpFieldValues {
   name: string;

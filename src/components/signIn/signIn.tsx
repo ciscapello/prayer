@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {LoginStackParams} from '../../navigate/loginNavigation';
+import {LoginStackParams} from '../../navigation/loginNavigation';
 import {useAppDispatch} from '../../hooks';
 import {signInFetch} from '../../store';
 

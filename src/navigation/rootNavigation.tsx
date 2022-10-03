@@ -23,7 +23,7 @@ export default function RootNavigation() {
           <Stack.Screen
             name="DeskNavigation"
             component={DeskNavigation}
-            options={{title: 'My desk'}}
+            options={{headerShown: false}}
           />
         ) : (
           <Stack.Screen

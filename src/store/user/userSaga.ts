@@ -1,5 +1,5 @@
-import {all, call, put, takeEvery} from 'redux-saga/effects';
-import axios, {AxiosResponse} from 'axios';
+import {call, put, takeEvery} from 'redux-saga/effects';
+import {AxiosResponse} from 'axios';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {SignUpFieldValues} from '../../components/signUp/signUp';
 import {SignInFormValues} from '../../components/signIn/signIn';
@@ -9,16 +9,15 @@ import {
   singInSuccess,
   singUpSuccess,
 } from './userSlice';
-
-const BASE_URL = 'https://prayer.herokuapp.com';
+import Api from '../../api';
 
 const signUpApi = (data: SignUpFieldValues) => {
-  const res = axios.post(`${BASE_URL}/auth/sign-up`, data);
+  const res = Api.post('auth/sign-up', data);
   return res;
 };
 
 const signInApi = (data: SignInFormValues) => {
-  const res = axios.post(`${BASE_URL}/auth/sign-in`, data);
+  const res = Api.post('auth/sign-in', data);
   return res;
 };
 
@@ -42,17 +41,10 @@ function* signIn(action: PayloadAction<SignInFormValues>) {
   }
 }
 
-function* signUpWatcher() {
+export function* signUpWatcher() {
   yield takeEvery('user/signUpFetch', signUp);
 }
 
-function* signInWatcher() {
+export function* signInWatcher() {
   yield takeEvery('user/signInFetch', signIn);
 }
-
-function* rootSaga() {
-  yield all([call(signUpWatcher), call(signInWatcher)]);
-  console.log('saga called');
-}
-
-export default rootSaga;
