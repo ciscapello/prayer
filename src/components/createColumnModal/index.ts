@@ -1,1 +1,1 @@
-export {default as CreateColumnModal} from './createColumnModal';
+export { default as CreateColumnModal } from './createColumnModal';

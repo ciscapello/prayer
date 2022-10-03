@@ -1,8 +1,8 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
-import {AxiosResponse} from 'axios';
-import {PayloadAction} from '@reduxjs/toolkit';
-import {SignUpFieldValues} from '../../components/signUp/signUp';
-import {SignInFormValues} from '../../components/signIn/signIn';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { AxiosResponse } from 'axios';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { SignUpFieldValues } from '../../components/signUp/signUp';
+import { SignInFormValues } from '../../components/signIn/signIn';
 import {
   signInFailure,
   signUpFailure,

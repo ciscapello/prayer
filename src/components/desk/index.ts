@@ -1,1 +1,1 @@
-export {default as Desk} from './desk';
+export { default as Desk } from './desk';

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Controller, SubmitHandler, useForm} from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import {
   Modal,
   StyleSheet,
@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useAppDispatch} from '../../hooks';
-import {createColumn} from '../../store/columns';
+import { useAppDispatch } from '../../hooks';
+import { createColumn } from '../../store/columns';
 
 interface CreateColumnModalProps {
   modalIsShow: boolean;
@@ -25,11 +25,13 @@ export default function CreateColumnModal({
   setModalIsShow,
 }: CreateColumnModalProps) {
   const dispatch = useAppDispatch();
-  const {control, handleSubmit, reset} = useForm<CreateColumnModalFormValues>({
-    defaultValues: {
-      title: '',
+  const { control, handleSubmit, reset } = useForm<CreateColumnModalFormValues>(
+    {
+      defaultValues: {
+        title: '',
+      },
     },
-  });
+  );
 
   const onSubmit: SubmitHandler<CreateColumnModalFormValues> = data => {
     if (data.title.trim()) {
@@ -52,7 +54,7 @@ export default function CreateColumnModal({
         <View style={styles.modalView}>
           <Controller
             control={control}
-            render={({field: {onChange, value}}) => (
+            render={({ field: { onChange, value } }) => (
               <TextInput
                 style={styles.input}
                 placeholder="Title"

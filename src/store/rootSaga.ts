@@ -1,9 +1,9 @@
-import {all, call} from 'redux-saga/effects';
+import { all, call } from 'redux-saga/effects';
 import {
   createColumnsWatcher,
   getAllColumnsWatcher,
 } from './columns/columnsSaga';
-import {signInWatcher, signUpWatcher} from './user/userSaga';
+import { signInWatcher, signUpWatcher } from './user/userSaga';
 
 function* rootSaga() {
   yield all([

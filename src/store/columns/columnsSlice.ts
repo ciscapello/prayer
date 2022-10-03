@@ -1,5 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {Column} from '../../types';
+import { createSlice } from '@reduxjs/toolkit';
+import { Column } from '../../types';
 
 interface ColumnsState {
   columns: Column[] | [];

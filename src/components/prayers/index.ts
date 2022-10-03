@@ -1,1 +1,1 @@
-export {default as Prayers} from './prayers';
+export { default as Prayers } from './prayers';

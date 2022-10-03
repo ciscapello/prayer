@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from '@redux-saga/core';
 import userSlice from './user/userSlice';
 import rootSaga from './rootSaga';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SignUp, SignIn} from '../components';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SignUp, SignIn } from '../components';
 
 export type LoginStackParams = {
   SignUp: undefined;
@@ -16,9 +16,9 @@ export default function LoginNavigation() {
       <Stack.Screen
         name="SignUp"
         component={SignUp}
-        options={{title: 'Welcome'}}
+        options={{ title: 'Welcome' }}
       />
-      <Stack.Screen name="SignIn" component={SignIn} options={{title: ''}} />
+      <Stack.Screen name="SignIn" component={SignIn} options={{ title: '' }} />
     </Stack.Navigator>
   );
 }

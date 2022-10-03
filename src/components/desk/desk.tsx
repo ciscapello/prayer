@@ -1,6 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   Text,
   SafeAreaView,
@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {DeskStackParams} from '../../navigation/deskNavigation';
-import {fetchColumns} from '../../store/columns';
-import {CreateColumnModal} from '../createColumnModal';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { DeskStackParams } from '../../navigation/deskNavigation';
+import { fetchColumns } from '../../store/columns';
+import { CreateColumnModal } from '../createColumnModal';
 
 export default function Desk() {
   const dispatch = useAppDispatch();
@@ -41,7 +41,14 @@ export default function Desk() {
         style={styles.list}
         data={columns}
         renderItem={item => (
-          <TouchableOpacity style={styles.column}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('PrayersMain', {
+                id: item.item.id,
+                title: item.item.title,
+              })
+            }
+            style={styles.column}>
             <Text style={styles.title}>{item.item.title}</Text>
           </TouchableOpacity>
         )}

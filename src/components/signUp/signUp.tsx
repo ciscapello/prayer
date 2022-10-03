@@ -1,7 +1,7 @@
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import {useForm, Controller, SubmitHandler} from 'react-hook-form';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import {
   Button,
   SafeAreaView,
@@ -11,9 +11,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useAppDispatch} from '../../hooks';
-import {LoginStackParams} from '../../navigation/loginNavigation';
-import {signUpFetch} from '../../store';
+import { useAppDispatch } from '../../hooks';
+import { LoginStackParams } from '../../navigation/loginNavigation';
+import { signUpFetch } from '../../store';
 
 export interface SignUpFieldValues {
   name: string;
@@ -30,7 +30,7 @@ export default function SignUp() {
     control,
     handleSubmit,
     reset,
-    formState: {errors},
+    formState: { errors },
   } = useForm<SignUpFieldValues>({
     defaultValues: {
       name: '',
@@ -51,7 +51,7 @@ export default function SignUp() {
         <Text style={styles.title}>Sign up</Text>
         <Controller
           control={control}
-          render={({field: {onChange, value}}) => (
+          render={({ field: { onChange, value } }) => (
             <TextInput
               style={styles.input}
               placeholder="Name"
@@ -61,12 +61,12 @@ export default function SignUp() {
             />
           )}
           name="name"
-          rules={{required: true}}
+          rules={{ required: true }}
         />
         {errors.name && <Text style={styles.error}>Name is required</Text>}
         <Controller
           control={control}
-          render={({field: {onChange, value}}) => (
+          render={({ field: { onChange, value } }) => (
             <TextInput
               style={styles.input}
               placeholder="Email"
@@ -76,12 +76,15 @@ export default function SignUp() {
             />
           )}
           name="email"
-          rules={{required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g}}
+          rules={{
+            required: true,
+            pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+          }}
         />
         {errors.email && <Text style={styles.error}>Enter existing email</Text>}
         <Controller
           control={control}
-          render={({field: {onChange, value}}) => (
+          render={({ field: { onChange, value } }) => (
             <TextInput
               style={styles.input}
               placeholder="Password"
@@ -92,7 +95,7 @@ export default function SignUp() {
             />
           )}
           name="password"
-          rules={{minLength: 6}}
+          rules={{ minLength: 6 }}
         />
         {errors.password && (
           <Text style={styles.error}>Password must be minimum 6 symbols</Text>
