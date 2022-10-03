@@ -29,10 +29,28 @@ export const columnsSlice = createSlice({
       state.isError = true;
       console.log(action);
     },
+    createColumn: (state, action) => {
+      state.isLoading = true;
+      console.log(action);
+    },
+    createColumnSuccess: state => {
+      state.isLoading = false;
+    },
+    createColumnFailure: (state, action) => {
+      console.log(action);
+      state.isLoading = false;
+      state.isError = true;
+    },
   },
 });
 
-export const {fetchColumns, fetchColumnsSuccess, fetchColumnsFailure} =
-  columnsSlice.actions;
+export const {
+  fetchColumns,
+  fetchColumnsSuccess,
+  fetchColumnsFailure,
+  createColumn,
+  createColumnSuccess,
+  createColumnFailure,
+} = columnsSlice.actions;
 
 export default columnsSlice.reducer;

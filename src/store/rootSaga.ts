@@ -1,5 +1,8 @@
 import {all, call} from 'redux-saga/effects';
-import {getAllColumnsWatcher} from './columns/columnsSaga';
+import {
+  createColumnsWatcher,
+  getAllColumnsWatcher,
+} from './columns/columnsSaga';
 import {signInWatcher, signUpWatcher} from './user/userSaga';
 
 function* rootSaga() {
@@ -7,6 +10,7 @@ function* rootSaga() {
     call(signUpWatcher),
     call(signInWatcher),
     call(getAllColumnsWatcher),
+    call(createColumnsWatcher),
   ]);
   console.log('saga called');
 }

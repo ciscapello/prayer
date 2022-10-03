@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Desk, Prayers} from '../components';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 export type DeskStackParams = {
   Desk: undefined;
@@ -19,11 +18,6 @@ export default function DeskNavigation() {
         component={Desk}
         options={{
           title: 'My desk',
-          headerRight: () => (
-            <TouchableOpacity>
-              <Text style={styles.plus}>+</Text>
-            </TouchableOpacity>
-          ),
         }}
       />
       <Stack.Screen
@@ -34,11 +28,3 @@ export default function DeskNavigation() {
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  plus: {
-    color: '#72A8BC',
-    fontSize: 36,
-    lineHeight: 34,
-  },
-});
