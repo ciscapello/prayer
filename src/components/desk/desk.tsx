@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { DeskStackParams } from '../../navigation/deskNavigation';
 import { fetchColumns } from '../../store/columns';
 import { CreateColumnModal } from '../createColumnModal';
+import { getAllPrayers } from '../../store/prayers/prayersSlice';
 
 export default function Desk() {
   const dispatch = useAppDispatch();
@@ -19,7 +20,7 @@ export default function Desk() {
   const navigation =
     useNavigation<NativeStackNavigationProp<DeskStackParams>>();
 
-  const [modalIsShow, setModalIsShow] = React.useState(true);
+  const [modalIsShow, setModalIsShow] = React.useState(false);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -33,6 +34,7 @@ export default function Desk() {
 
   useEffect(() => {
     dispatch(fetchColumns());
+    dispatch(getAllPrayers());
   }, [dispatch]);
 
   return (

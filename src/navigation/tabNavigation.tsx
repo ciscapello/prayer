@@ -9,8 +9,8 @@ import { PrayersMainProps } from './deskNavigation';
 const Tab = createMaterialTopTabNavigator();
 
 export type TabNavigationParams = {
-  Prayers: { title: string; id: string };
-  Subscribed: { title: string; id: string };
+  Prayers: undefined;
+  Subscribed: undefined;
 };
 
 export type PrayerTabScreenProps = MaterialTopTabScreenProps<
@@ -31,18 +31,21 @@ export default function PrayersMain({ route, navigation }: PrayersMainProps) {
   }, [navigation, route.params.title]);
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarLabelStyle: { fontSize: 13, fontWeight: '600' },
+        tabBarPressOpacity: 0.5,
+        tabBarActiveTintColor: '#72A8BC',
+      }}>
       <Tab.Screen
-        options={{ title: 'TO DO' }}
+        options={{ title: 'MY PRAYERS' }}
         name="Prayers"
-        component={Prayers}
-        initialParams={{ id: route.params.id }}
+        children={() => <Prayers id={route.params.id} />}
       />
       <Tab.Screen
         options={{ title: 'SUBSCRIBED' }}
         name="Subscribed"
-        component={Subscribed}
-        initialParams={{ id: route.params.id }}
+        children={() => <Subscribed id={route.params.id} />}
       />
     </Tab.Navigator>
   );

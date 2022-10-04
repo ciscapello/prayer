@@ -5,12 +5,14 @@ interface ColumnsState {
   columns: Column[] | [];
   isLoading: boolean;
   isError: boolean;
+  activeColumnId: number | null;
 }
 
 const initialState: ColumnsState = {
   columns: [],
   isLoading: false,
   isError: false,
+  activeColumnId: null,
 };
 
 export const columnsSlice = createSlice({
@@ -41,6 +43,9 @@ export const columnsSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
     },
+    setActiveColumnId: (state, action) => {
+      state.activeColumnId = action.payload;
+    },
   },
 });
 
@@ -51,6 +56,7 @@ export const {
   createColumn,
   createColumnSuccess,
   createColumnFailure,
+  setActiveColumnId,
 } = columnsSlice.actions;
 
 export default columnsSlice.reducer;

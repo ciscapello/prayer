@@ -4,13 +4,9 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { Desk } from '../components';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import PrayersMain from './tabNavigation';
-
-export enum DeskScreens {
-  DeskScreen = 'Desk',
-  PrayersMainScreen = 'PrayersMain',
-}
+import { Settings } from '../shared/assets/svgs';
 
 export type DeskStackParams = {
   Desk: undefined;
@@ -31,13 +27,22 @@ export default function DeskNavigation() {
         name="Desk"
         component={Desk}
         options={{
-          title: 'My desk',
+          title: 'My Desk',
         }}
       />
       <Stack.Screen
         name="PrayersMain"
         component={PrayersMain}
-        options={{ title: 'To do', headerLeft: () => <Text /> }}
+        options={{
+          title: 'To do',
+          headerLeft: () => <Text />,
+          headerShadowVisible: false,
+          headerRight: () => (
+            <TouchableOpacity>
+              <Settings width={24} height={24} />
+            </TouchableOpacity>
+          ),
+        }}
       />
     </Stack.Navigator>
   );

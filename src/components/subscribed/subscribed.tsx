@@ -1,6 +1,10 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-export default function Subscribed() {
-  return <Text>asdasd</Text>;
+interface SubscribedProps {
+  id: number;
+}
+
+export default function Subscribed({ id }: SubscribedProps) {
+  return <Text>{id}</Text>;
 }
