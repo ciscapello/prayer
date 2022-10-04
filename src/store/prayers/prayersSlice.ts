@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Prayer } from '../../types';
 
 interface ColumnsState {
@@ -29,10 +29,24 @@ export const prayersSlice = createSlice({
       state.isError = true;
       console.log(action);
     },
+    toggleCheckedPrayer: (state, action: PayloadAction<Prayer>) => {
+      const id = action.payload.id;
+      const checkState = state.prayers.find(item => item.id === id)?.checked;
+      state.prayers.find(item => item.id === id)!.checked = !checkState;
+    },
+    toggleCheckedPrayerFailure: (state, action) => {
+      state.isError = true;
+      console.log(action);
+    },
   },
 });
 
-export const { getAllPrayers, getAllPrayersSuccess, getAllPrayersFailure } =
-  prayersSlice.actions;
+export const {
+  getAllPrayers,
+  getAllPrayersSuccess,
+  getAllPrayersFailure,
+  toggleCheckedPrayer,
+  toggleCheckedPrayerFailure,
+} = prayersSlice.actions;
 
 export default prayersSlice.reducer;

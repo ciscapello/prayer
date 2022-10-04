@@ -3,7 +3,10 @@ import {
   createColumnsWatcher,
   getAllColumnsWatcher,
 } from './columns/columnsSaga';
-import { getAllPrayersWatcher } from './prayers/prayersSaga';
+import {
+  checkPrayerWatcher,
+  getAllPrayersWatcher,
+} from './prayers/prayersSaga';
 import { signInWatcher, signUpWatcher } from './user/userSaga';
 
 function* rootSaga() {
@@ -13,6 +16,7 @@ function* rootSaga() {
     call(getAllColumnsWatcher),
     call(createColumnsWatcher),
     call(getAllPrayersWatcher),
+    call(checkPrayerWatcher),
   ]);
   console.log('saga called');
 }
