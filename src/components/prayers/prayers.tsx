@@ -14,9 +14,15 @@ import {
   selectNotAnsweredPrayersByColumnId,
 } from '../../store/prayers/selectors';
 import { PrayerRow } from '../prayerRow';
+import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import { createPrayer } from '../../store/prayers/prayersSlice';
 
 interface PrayersProps {
   id: number;
+}
+
+interface PrayerFieldValue {
+  title: string;
 }
 
 export default function Prayers({ id }: PrayersProps) {
@@ -28,16 +34,51 @@ export default function Prayers({ id }: PrayersProps) {
   const answeredPrayers = useAppSelector(selectAnsweredPrayersByColumnId);
   const [answeredPrayersIsShow, setAnsweredPrayersIsShow] = useState(false);
 
+  const { control, handleSubmit, reset } = useForm<PrayerFieldValue>({
+    mode: 'onChange',
+    defaultValues: {
+      title: '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<PrayerFieldValue> = data => {
+    console.log(data);
+    const { title } = data;
+    dispatch(createPrayer({ title, id }));
+    reset();
+  };
+
+  const title = useWatch({
+    control,
+    name: 'title',
+  });
+
   return (
     <>
       <View style={styles.addView}>
         <Text style={styles.plus}>+</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Add a prayer..."
-          placeholderTextColor={'#9C9C9C'}
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <TextInput
+              style={styles.input}
+              placeholder="Add a prayer..."
+              onChangeText={val => onChange(val)}
+              value={value}
+              placeholderTextColor={'#9C9C9C'}
+            />
+          )}
+          name="title"
         />
       </View>
+      {title && (
+        <TouchableOpacity
+          style={styles.sendButton}
+          onPress={handleSubmit(onSubmit)}>
+          <Text style={styles.buttonText}>SEND</Text>
+        </TouchableOpacity>
+      )}
+
       <View style={styles.prayersContainer}>
         <FlatList
           data={notAnsweredPrayers}
@@ -111,5 +152,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 12,
     fontWeight: '700',
+  },
+  sendButton: {
+    marginTop: 5,
+    backgroundColor: '#BFB393',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '30%',
+    marginLeft: 'auto',
+    marginRight: '5%',
+    height: 30,
   },
 });

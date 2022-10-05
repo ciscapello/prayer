@@ -6,6 +6,7 @@ import {
 } from './columns/columnsSaga';
 import {
   checkPrayerWatcher,
+  createPrayerWatcher,
   getAllPrayersWatcher,
 } from './prayers/prayersSaga';
 import { signInWatcher, signUpWatcher } from './user/userSaga';
@@ -19,6 +20,7 @@ function* rootSaga() {
     call(getAllPrayersWatcher),
     call(checkPrayerWatcher),
     call(deleteColumnWatcher),
+    call(createPrayerWatcher),
   ]);
   console.log('saga called');
 }
