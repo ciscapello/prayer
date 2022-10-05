@@ -4,9 +4,8 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { Desk } from '../components';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native';
 import PrayersMain from './tabNavigation';
-import { Settings } from '../shared/assets/svgs';
 
 export type DeskStackParams = {
   Desk: undefined;
@@ -37,11 +36,6 @@ export default function DeskNavigation() {
           title: 'To do',
           headerLeft: () => <Text />,
           headerShadowVisible: false,
-          headerRight: () => (
-            <TouchableOpacity>
-              <Settings width={24} height={24} />
-            </TouchableOpacity>
-          ),
         }}
       />
     </Stack.Navigator>

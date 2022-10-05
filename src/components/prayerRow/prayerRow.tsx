@@ -32,7 +32,13 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
             onChange={onChange}
           />
         </View>
-        <Text style={styles.title}>{prayer.title}</Text>
+        <Text
+          style={
+            (styles.title,
+            { textDecorationLine: prayer.checked ? 'line-through' : 'none' })
+          }>
+          {prayer.title}
+        </Text>
       </View>
       <View style={styles.iconBox}>
         <User width={40} height={40} />

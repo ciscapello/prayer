@@ -46,6 +46,26 @@ export const columnsSlice = createSlice({
     setActiveColumnId: (state, action) => {
       state.activeColumnId = action.payload;
     },
+    deleteColumn: state => {
+      state.isLoading = true;
+    },
+    deleteColumnSuccess: state => {
+      state.isLoading = false;
+    },
+    deleteColumnFailure: state => {
+      state.isError = true;
+    },
+    updateColumn: (state, action) => {
+      state.isLoading = true;
+      console.log(action);
+    },
+    updateColumnSuccess: state => {
+      state.isLoading = false;
+    },
+    updateColumnFailure: (state, action) => {
+      state.isError = true;
+      console.log(action);
+    },
   },
 });
 
@@ -57,6 +77,12 @@ export const {
   createColumnSuccess,
   createColumnFailure,
   setActiveColumnId,
+  deleteColumn,
+  deleteColumnSuccess,
+  deleteColumnFailure,
+  updateColumn,
+  updateColumnSuccess,
+  updateColumnFailure,
 } = columnsSlice.actions;
 
 export default columnsSlice.reducer;

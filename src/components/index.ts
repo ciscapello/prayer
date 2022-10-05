@@ -5,3 +5,4 @@ export { Prayers } from './prayers';
 export { CreateColumnModal } from './createColumnModal';
 export { Subscribed } from './subscribed';
 export { PrayerRow } from './prayerRow';
+export { UpdateColumnModal } from './updateColumnModal';

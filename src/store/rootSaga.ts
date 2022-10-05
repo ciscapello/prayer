@@ -1,6 +1,7 @@
 import { all, call } from 'redux-saga/effects';
 import {
   createColumnsWatcher,
+  deleteColumnWatcher,
   getAllColumnsWatcher,
 } from './columns/columnsSaga';
 import {
@@ -17,6 +18,7 @@ function* rootSaga() {
     call(createColumnsWatcher),
     call(getAllPrayersWatcher),
     call(checkPrayerWatcher),
+    call(deleteColumnWatcher),
   ]);
   console.log('saga called');
 }

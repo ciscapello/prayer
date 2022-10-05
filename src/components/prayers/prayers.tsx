@@ -12,7 +12,6 @@ import { setActiveColumnId } from '../../store/columns';
 import {
   selectAnsweredPrayersByColumnId,
   selectNotAnsweredPrayersByColumnId,
-  // selectPrayersByColumnId,
 } from '../../store/prayers/selectors';
 import { PrayerRow } from '../prayerRow';
 
@@ -25,7 +24,6 @@ export default function Prayers({ id }: PrayersProps) {
   useLayoutEffect(() => {
     dispatch(setActiveColumnId(id));
   }, [dispatch, id]);
-  // const prayers = useAppSelector(selectPrayersByColumnId);
   const notAnsweredPrayers = useAppSelector(selectNotAnsweredPrayersByColumnId);
   const answeredPrayers = useAppSelector(selectAnsweredPrayersByColumnId);
   const [answeredPrayersIsShow, setAnsweredPrayersIsShow] = useState(false);
