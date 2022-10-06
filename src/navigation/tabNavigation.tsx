@@ -8,12 +8,12 @@ import { PrayersMainProps } from './deskNavigation';
 import { TouchableOpacity } from 'react-native';
 import { Settings } from '../shared/assets/svgs';
 
-const Tab = createMaterialTopTabNavigator();
-
 export type TabNavigationParams = {
   Prayers: undefined;
   Subscribed: undefined;
 };
+
+const Tab = createMaterialTopTabNavigator<TabNavigationParams>();
 
 export type PrayerTabScreenProps = MaterialTopTabScreenProps<
   TabNavigationParams,

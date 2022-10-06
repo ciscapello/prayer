@@ -6,3 +6,7 @@ export { CreateColumnModal } from './createColumnModal';
 export { Subscribed } from './subscribed';
 export { PrayerRow } from './prayerRow';
 export { UpdateColumnModal } from './updateColumnModal';
+export { PrayerPage } from './prayerPage';
+export { PrayerHeader } from './prayerHeader';
+export { PrayerCounter } from './prayerCounter';
+export { Comment } from './comment';
