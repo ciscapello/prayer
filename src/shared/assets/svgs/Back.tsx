@@ -3,8 +3,9 @@ import Svg, { SvgProps, Mask, Path, G } from 'react-native-svg';
 
 const SvgBack = (props: SvgProps) => (
   <Svg
-    viewBox="0 0 18 16"
-    // fill="none"
+    width={18}
+    height={16}
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
     {...props}>

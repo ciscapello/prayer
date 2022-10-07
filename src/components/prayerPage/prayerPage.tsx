@@ -1,17 +1,58 @@
 import React, { useLayoutEffect } from 'react';
-import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { OnePrayerProps } from '../../navigation/deskNavigation';
 import { Message } from '../../shared/assets/svgs';
+import { createComment } from '../../store';
 import { Comment } from '../comment';
 import { PrayerCounter } from '../prayerCounter';
 import { PrayerHeader } from '../prayerHeader';
 
+interface CommentFieldValue {
+  body: string;
+}
+
 export default function PrayerPage({ route, navigation }: OnePrayerProps) {
+  const dispatch = useAppDispatch();
+  // let comments = useAppSelector(selectCommentsOfPrayer);
+  let comments = useAppSelector(state => state.comments.comments);
+  comments = comments.filter(
+    comment => comment.prayerId === route.params.prayer.id,
+  );
+  console.log(comments);
+  const { title, id } = route.params.prayer;
   useLayoutEffect(() => {
     navigation.setOptions({
-      header: () => <PrayerHeader title={route.params.prayer.title} />,
+      header: () => <PrayerHeader title={title} />,
     });
-  }, [navigation, route.params.prayer.title]);
+  }, [navigation, title, id, dispatch]);
+  const { control, handleSubmit, reset } = useForm<CommentFieldValue>({
+    mode: 'onChange',
+    defaultValues: {
+      body: '',
+    },
+  });
+
+  const comment = useWatch({
+    control,
+    name: 'body',
+  });
+
+  const onSubmit: SubmitHandler<CommentFieldValue> = data => {
+    const { body } = data;
+    dispatch(createComment({ id, body }));
+    reset();
+  };
+
   return (
     <View>
       <PrayerCounter />
@@ -33,12 +74,30 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
       </View>
       <View style={styles.commentsContainer}>
         <Text style={styles.commentsTitle}>COMMENTS</Text>
-        <Comment />
-        <Comment />
+        <FlatList data={comments} renderItem={Comment} />
         <View style={styles.inputContainer}>
           <Message style={styles.image} width={24} height={24} />
-          <TextInput style={styles.input} placeholder="Add a comment..." />
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <TextInput
+                style={styles.input}
+                placeholder="Add a comment..."
+                onChangeText={val => onChange(val)}
+                value={value}
+                placeholderTextColor={'#9C9C9C'}
+              />
+            )}
+            name="body"
+          />
         </View>
+        {comment && (
+          <TouchableOpacity
+            onPress={handleSubmit(onSubmit)}
+            style={styles.sendButton}>
+            <Text style={styles.buttonText}>SEND</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -100,6 +159,20 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 17,
-    // paddingLeft: 50,
+  },
+  sendButton: {
+    backgroundColor: '#BFB393',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '30%',
+    marginLeft: 'auto',
+    marginRight: '5%',
+    height: 30,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '700',
   },
 });

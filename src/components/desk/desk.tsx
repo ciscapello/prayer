@@ -13,6 +13,7 @@ import { DeskStackParams } from '../../navigation/deskNavigation';
 import { fetchColumns } from '../../store/columns';
 import { CreateColumnModal } from '../createColumnModal';
 import { getAllPrayers } from '../../store/prayers/prayersSlice';
+import { getAllComments } from '../../store/comments';
 
 export default function Desk() {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ export default function Desk() {
   useEffect(() => {
     dispatch(fetchColumns());
     dispatch(getAllPrayers());
+    dispatch(getAllComments());
   }, [dispatch]);
 
   return (

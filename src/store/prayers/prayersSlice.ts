@@ -1,22 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Prayer } from '../../types';
 
-interface ColumnsState {
+interface PrayersState {
   isLoading: boolean;
   isError: boolean;
   prayers: Prayer[] | [];
+  activePrayerId: number | null;
 }
 
-const initialState: ColumnsState = {
+const initialState: PrayersState = {
   isLoading: false,
   isError: false,
   prayers: [],
+  activePrayerId: null,
 };
 
 export const prayersSlice = createSlice({
   name: 'prayers',
   initialState,
   reducers: {
+    setActivePrayerId: (state, action) => {
+      console.log('active prayer id', action.payload);
+      state.activePrayerId = action.payload;
+    },
     getAllPrayers: state => {
       state.isLoading = true;
     },
@@ -61,6 +67,7 @@ export const {
   createPrayer,
   createPrayerSuccess,
   createPrayerFailure,
+  setActivePrayerId,
 } = prayersSlice.actions;
 
 export default prayersSlice.reducer;

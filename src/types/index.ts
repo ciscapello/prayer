@@ -13,3 +13,11 @@ export interface Prayer {
   columnId: number;
   commentsIds: [];
 }
+
+export interface IComment {
+  id: number;
+  body: string;
+  created: string;
+  prayerId: number;
+  userId: number;
+}

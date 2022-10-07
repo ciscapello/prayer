@@ -4,7 +4,10 @@ import { Prayer } from '../../types';
 import CheckBox from '@react-native-community/checkbox';
 import { User, Prayer as PrayerIcon } from '../../shared/assets/svgs';
 import { useAppDispatch } from '../../hooks';
-import { toggleCheckedPrayer } from '../../store/prayers/prayersSlice';
+import {
+  setActivePrayerId,
+  toggleCheckedPrayer,
+} from '../../store/prayers/prayersSlice';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useNavigation } from '@react-navigation/native';
 import { PrayersScreenNavigationProps } from '../../navigation/deskNavigation';
@@ -26,6 +29,11 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
     viewedTitle = viewedTitle.slice(0, 15).concat('...');
   }
 
+  const onPress = () => {
+    dispatch(setActivePrayerId(prayer.id));
+    navigation.navigate('OnePrayer', { prayer: prayer });
+  };
+
   const rightAction = () => {
     return (
       <View style={styles.deleteButton}>
@@ -39,7 +47,7 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
       <TouchableHighlight
         underlayColor={'#cdcdcd'}
         style={styles.container}
-        onPress={() => navigation.navigate('OnePrayer', { prayer: prayer })}>
+        onPress={onPress}>
         <>
           <View style={styles.wrapper}>
             <View style={styles.checkboxContainer}>

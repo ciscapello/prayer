@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -27,7 +27,7 @@ interface PrayerFieldValue {
 
 export default function Prayers({ id }: PrayersProps) {
   const dispatch = useAppDispatch();
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(setActiveColumnId(id));
   }, [dispatch, id]);
   const notAnsweredPrayers = useAppSelector(selectNotAnsweredPrayersByColumnId);

@@ -4,6 +4,7 @@ import userSlice from './user/userSlice';
 import rootSaga from './rootSaga';
 import columnsSlice from './columns/columnsSlice';
 import prayersSlice from './prayers/prayersSlice';
+import commentsSlice from './comments/commentsSlice';
 
 const saga = createSagaMiddleware();
 
@@ -12,6 +13,7 @@ const store = configureStore({
     user: userSlice,
     columns: columnsSlice,
     prayers: prayersSlice,
+    comments: commentsSlice,
   },
   middleware: [saga],
 });

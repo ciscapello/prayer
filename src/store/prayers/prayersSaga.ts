@@ -14,6 +14,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 
 const getAllPrayersApi = () => {
   const res = Api.get('prayers');
+  console.log(res);
   return res;
 };
 

@@ -4,6 +4,7 @@ import {
   deleteColumnWatcher,
   getAllColumnsWatcher,
 } from './columns/columnsSaga';
+import { getAllCommentsWatcher } from './comments/commentsSaga';
 import {
   checkPrayerWatcher,
   createPrayerWatcher,
@@ -21,6 +22,7 @@ function* rootSaga() {
     call(checkPrayerWatcher),
     call(deleteColumnWatcher),
     call(createPrayerWatcher),
+    call(getAllCommentsWatcher),
   ]);
   console.log('saga called');
 }

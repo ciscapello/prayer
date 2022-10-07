@@ -1,7 +1,13 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { IComment } from '../../types';
 
-export default function Comment() {
+interface CommentProps {
+  item: IComment;
+}
+
+export default function Comment({ item }: CommentProps) {
+  // const username = useAppSelector(state => state.user.username);
   return (
     <View style={styles.container}>
       <Image
@@ -11,10 +17,10 @@ export default function Comment() {
       <View>
         <View style={styles.usernameContainer}>
           <Text style={styles.username}>Anna Barber</Text>
-          <Text style={styles.date}>2 days ago</Text>
+          <Text style={styles.date}>{item.created}</Text>
         </View>
         <View>
-          <Text style={styles.commentBody}>Hey hey!</Text>
+          <Text style={styles.commentBody}>{item.body}</Text>
         </View>
       </View>
     </View>
