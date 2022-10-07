@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Prayer } from '../../types';
 import CheckBox from '@react-native-community/checkbox';
 import { User, Prayer as PrayerIcon } from '../../shared/assets/svgs';
@@ -8,7 +8,6 @@ import {
   setActivePrayerId,
   toggleCheckedPrayer,
 } from '../../store/prayers/prayersSlice';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useNavigation } from '@react-navigation/native';
 import { PrayersScreenNavigationProps } from '../../navigation/deskNavigation';
 
@@ -19,9 +18,6 @@ interface PrayerRowProps {
 export default function PrayerRow({ prayer }: PrayerRowProps) {
   const dispatch = useAppDispatch();
   const navigation = useNavigation<PrayersScreenNavigationProps>();
-  const onChange = () => {
-    dispatch(toggleCheckedPrayer(prayer));
-  };
 
   let viewedTitle = prayer.title;
 
@@ -34,36 +30,29 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
     navigation.navigate('OnePrayer', { prayer: prayer });
   };
 
-  const rightAction = () => {
-    return (
-      <View style={styles.deleteButton}>
-        <Text style={styles.deleteText}>Delete</Text>
-      </View>
-    );
+  const onChange = () => {
+    dispatch(toggleCheckedPrayer(prayer));
   };
 
   return (
-    <Swipeable renderRightActions={rightAction}>
-      <TouchableHighlight
-        underlayColor={'#cdcdcd'}
-        style={styles.container}
-        onPress={onPress}>
-        <>
-          <View style={styles.wrapper}>
-            <View style={styles.checkboxContainer}>
-              <View style={styles.statusBar} />
-              <CheckBox
-                style={styles.checkbox}
-                value={prayer.checked}
-                boxType="square"
-                onAnimationType="fade"
-                offAnimationType="fade"
-                animationDuration={0.1}
-                tintColors={{ true: '#000', false: '#000' }}
-                onCheckColor={'#000'}
-                onChange={onChange}
-              />
-            </View>
+    <View style={styles.container}>
+      <View>
+        <View style={styles.wrapper}>
+          <View style={styles.checkboxContainer}>
+            <View style={styles.statusBar} />
+            <CheckBox
+              style={styles.checkbox}
+              value={prayer.checked}
+              boxType="square"
+              onAnimationType="fade"
+              offAnimationType="fade"
+              animationDuration={0.1}
+              tintColors={{ true: '#000', false: '#000' }}
+              onCheckColor={'#000'}
+              onChange={onChange}
+            />
+          </View>
+          <TouchableOpacity style={styles.touchable} onPress={onPress}>
             <Text
               style={
                 (styles.title,
@@ -73,14 +62,14 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
               }>
               {viewedTitle}
             </Text>
-          </View>
-          <View style={styles.iconBox}>
-            <User width={40} height={40} />
-            <PrayerIcon width={40} height={40} fill={'#72A8BC'} />
-          </View>
-        </>
-      </TouchableHighlight>
-    </Swipeable>
+            <View style={styles.iconBox}>
+              <User width={40} height={40} />
+              <PrayerIcon width={40} height={40} fill={'#72A8BC'} />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   );
 }
 
@@ -94,6 +83,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: 68,
+    width: '100%',
     borderBottomColor: '#E5E5E5',
     borderBottomWidth: 1,
     borderLeftStyle: 'solid',
@@ -123,9 +113,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     borderStyle: 'solid',
+    marginLeft: 'auto',
   },
   wrapper: {
     flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
   },
   deleteButton: {
     backgroundColor: '#AC5253',
@@ -135,5 +128,11 @@ const styles = StyleSheet.create({
   },
   deleteText: {
     color: 'white',
+  },
+  touchable: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '80%',
+    justifyContent: 'space-between',
   },
 });

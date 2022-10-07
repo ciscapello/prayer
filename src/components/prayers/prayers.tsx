@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  FlatList,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -54,7 +54,7 @@ export default function Prayers({ id }: PrayersProps) {
   });
 
   return (
-    <>
+    <ScrollView>
       <View style={styles.addView}>
         <Text style={styles.plus}>+</Text>
         <Controller
@@ -80,10 +80,9 @@ export default function Prayers({ id }: PrayersProps) {
       )}
 
       <View style={styles.prayersContainer}>
-        <FlatList
-          data={notAnsweredPrayers}
-          renderItem={item => <PrayerRow prayer={item.item} />}
-        />
+        {notAnsweredPrayers.map(item => (
+          <PrayerRow prayer={item} key={item.id} />
+        ))}
       </View>
       <TouchableOpacity
         style={styles.showButton}
@@ -94,13 +93,12 @@ export default function Prayers({ id }: PrayersProps) {
       </TouchableOpacity>
       {answeredPrayersIsShow ? (
         <View style={styles.prayersContainer}>
-          <FlatList
-            data={answeredPrayers}
-            renderItem={item => <PrayerRow prayer={item.item} />}
-          />
+          {answeredPrayers.map(item => (
+            <PrayerRow prayer={item} key={item.id} />
+          ))}
         </View>
       ) : null}
-    </>
+    </ScrollView>
   );
 }
 

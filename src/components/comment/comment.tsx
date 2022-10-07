@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { useAppSelector } from '../../hooks';
 import { IComment } from '../../types';
 
 interface CommentProps {
@@ -8,6 +9,8 @@ interface CommentProps {
 
 export default function Comment({ item }: CommentProps) {
   // const username = useAppSelector(state => state.user.username);
+  const username = useAppSelector(state => state.user.username);
+  console.log(username ? username : '3424243');
   return (
     <View style={styles.container}>
       <Image
@@ -16,7 +19,7 @@ export default function Comment({ item }: CommentProps) {
       />
       <View>
         <View style={styles.usernameContainer}>
-          <Text style={styles.username}>Anna Barber</Text>
+          <Text style={styles.username}>ALALLA</Text>
           <Text style={styles.date}>{item.created}</Text>
         </View>
         <View>

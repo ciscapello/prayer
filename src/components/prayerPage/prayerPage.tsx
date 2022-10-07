@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import {
-  FlatList,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -24,6 +24,7 @@ interface CommentFieldValue {
 export default function PrayerPage({ route, navigation }: OnePrayerProps) {
   const dispatch = useAppDispatch();
   // let comments = useAppSelector(selectCommentsOfPrayer);
+
   let comments = useAppSelector(state => state.comments.comments);
   comments = comments.filter(
     comment => comment.prayerId === route.params.prayer.id,
@@ -54,7 +55,7 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
   };
 
   return (
-    <View>
+    <ScrollView nestedScrollEnabled={true}>
       <PrayerCounter />
       <View style={styles.membersContainer}>
         <Text style={styles.membersTitle}>MEMBERS</Text>
@@ -74,7 +75,9 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
       </View>
       <View style={styles.commentsContainer}>
         <Text style={styles.commentsTitle}>COMMENTS</Text>
-        <FlatList data={comments} renderItem={Comment} />
+        {comments.map(element => (
+          <Comment item={element} key={element.id} />
+        ))}
         <View style={styles.inputContainer}>
           <Message style={styles.image} width={24} height={24} />
           <Controller
@@ -99,7 +102,7 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
           </TouchableOpacity>
         )}
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
