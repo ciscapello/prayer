@@ -8,6 +8,7 @@ import { getAllCommentsWatcher } from './comments/commentsSaga';
 import {
   checkPrayerWatcher,
   createPrayerWatcher,
+  deletePrayerWatcher,
   getAllPrayersWatcher,
 } from './prayers/prayersSaga';
 import { signInWatcher, signUpWatcher } from './user/userSaga';
@@ -23,6 +24,7 @@ function* rootSaga() {
     call(deleteColumnWatcher),
     call(createPrayerWatcher),
     call(getAllCommentsWatcher),
+    call(deletePrayerWatcher),
   ]);
   console.log('saga called');
 }

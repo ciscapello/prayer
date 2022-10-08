@@ -5,15 +5,34 @@ import CheckBox from '@react-native-community/checkbox';
 import { User, Prayer as PrayerIcon } from '../../shared/assets/svgs';
 import { useAppDispatch } from '../../hooks';
 import {
+  deletePrayer,
   setActivePrayerId,
   toggleCheckedPrayer,
 } from '../../store/prayers/prayersSlice';
 import { useNavigation } from '@react-navigation/native';
 import { PrayersScreenNavigationProps } from '../../navigation/deskNavigation';
 
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedGestureHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
+import {
+  PanGestureHandler,
+  PanGestureHandlerGestureEvent,
+} from 'react-native-gesture-handler';
+
 interface PrayerRowProps {
   prayer: Prayer;
 }
+
+type ContextType = {
+  translateX: number;
+};
 
 export default function PrayerRow({ prayer }: PrayerRowProps) {
   const dispatch = useAppDispatch();
@@ -25,6 +44,48 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
     viewedTitle = viewedTitle.slice(0, 15).concat('...');
   }
 
+  const translateX = useSharedValue(0);
+
+  const panGestureEvent = useAnimatedGestureHandler<
+    PanGestureHandlerGestureEvent,
+    ContextType
+  >({
+    onStart: (event, context) => {
+      context.translateX = translateX.value;
+    },
+    onActive: (event, context) => {
+      if (translateX.value > -150 && translateX.value <= 0) {
+        translateX.value = event.translationX + context.translateX;
+      }
+    },
+    onEnd: event => {
+      if (translateX.value < -70) {
+        translateX.value = withTiming(-60);
+      } else {
+        translateX.value = withSpring(0);
+        console.log(event.translationX);
+      }
+    },
+    onFinish: () => {},
+  });
+
+  const rStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: translateX.value }],
+    };
+  });
+
+  const rDeleteButtonStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      translateX.value,
+      [0, -60],
+      [0, 1],
+      Extrapolate.EXTEND,
+    );
+
+    return { opacity };
+  });
+
   const onPress = () => {
     dispatch(setActivePrayerId(prayer.id));
     navigation.navigate('OnePrayer', { prayer: prayer });
@@ -34,42 +95,57 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
     dispatch(toggleCheckedPrayer(prayer));
   };
 
+  const onDelete = () => {
+    dispatch(deletePrayer(prayer.id));
+  };
+
   return (
-    <View style={styles.container}>
-      <View>
-        <View style={styles.wrapper}>
-          <View style={styles.checkboxContainer}>
-            <View style={styles.statusBar} />
-            <CheckBox
-              style={styles.checkbox}
-              value={prayer.checked}
-              boxType="square"
-              onAnimationType="fade"
-              offAnimationType="fade"
-              animationDuration={0.1}
-              tintColors={{ true: '#000', false: '#000' }}
-              onCheckColor={'#000'}
-              onChange={onChange}
-            />
-          </View>
-          <TouchableOpacity style={styles.touchable} onPress={onPress}>
-            <Text
-              style={
-                (styles.title,
-                {
-                  textDecorationLine: prayer.checked ? 'line-through' : 'none',
-                })
-              }>
-              {viewedTitle}
-            </Text>
-            <View style={styles.iconBox}>
-              <User width={40} height={40} />
-              <PrayerIcon width={40} height={40} fill={'#72A8BC'} />
+    <PanGestureHandler onGestureEvent={panGestureEvent}>
+      <Animated.View style={[rStyle]}>
+        <View style={styles.container}>
+          <View>
+            <View style={styles.wrapper}>
+              <View style={styles.checkboxContainer}>
+                <View style={styles.statusBar} />
+                <CheckBox
+                  style={styles.checkbox}
+                  value={prayer.checked}
+                  boxType="square"
+                  onAnimationType="fade"
+                  offAnimationType="fade"
+                  animationDuration={0.1}
+                  tintColors={{ true: '#000', false: '#000' }}
+                  onCheckColor={'#000'}
+                  onChange={onChange}
+                />
+              </View>
+              <TouchableOpacity style={styles.touchable} onPress={onPress}>
+                <Text
+                  style={
+                    (styles.title,
+                    {
+                      textDecorationLine: prayer.checked
+                        ? 'line-through'
+                        : 'none',
+                    })
+                  }>
+                  {viewedTitle}
+                </Text>
+              </TouchableOpacity>
+              <View style={styles.iconBox}>
+                <User width={40} height={40} />
+                <PrayerIcon width={40} height={40} fill={'#72A8BC'} />
+              </View>
             </View>
-          </TouchableOpacity>
+          </View>
+          <Animated.View style={[styles.deleteButton, rDeleteButtonStyle]}>
+            <TouchableOpacity onPress={onDelete}>
+              <Text style={styles.deleteText}>Delete</Text>
+            </TouchableOpacity>
+          </Animated.View>
         </View>
-      </View>
-    </View>
+      </Animated.View>
+    </PanGestureHandler>
   );
 }
 
@@ -124,7 +200,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#AC5253',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 80,
+    height: 68,
+    width: 70,
   },
   deleteText: {
     color: 'white',
@@ -132,7 +209,6 @@ const styles = StyleSheet.create({
   touchable: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '80%',
     justifyContent: 'space-between',
   },
 });

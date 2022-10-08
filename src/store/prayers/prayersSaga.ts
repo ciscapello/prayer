@@ -3,6 +3,8 @@ import { AxiosResponse } from 'axios';
 import {
   createPrayerFailure,
   createPrayerSuccess,
+  deletePrayerFailure,
+  deletePrayerSuccess,
   getAllPrayers,
   getAllPrayersFailure,
   getAllPrayersSuccess,
@@ -26,6 +28,11 @@ const checkPrayerApi = (prayer: Prayer) => {
     checked: !prayer.checked,
     columnId: prayer.columnId,
   });
+  return res;
+};
+
+const deletePrayerApi = (id: number) => {
+  const res = Api.delete(`prayers/${id}`);
   return res;
 };
 
@@ -61,6 +68,17 @@ function* checkPrayerWorker(action: PayloadAction<Prayer>) {
   }
 }
 
+function* deletePrayerWorker(action: PayloadAction<number>) {
+  try {
+    const response: AxiosResponse = yield call(deletePrayerApi, action.payload);
+    yield put(deletePrayerSuccess());
+    yield put(getAllPrayers());
+    return response;
+  } catch (error) {
+    yield put(deletePrayerFailure(error));
+  }
+}
+
 function* getAllPrayersWorker() {
   try {
     const response: AxiosResponse = yield call(getAllPrayersApi);
@@ -68,6 +86,10 @@ function* getAllPrayersWorker() {
   } catch (error) {
     yield put(getAllPrayersFailure(error));
   }
+}
+
+export function* deletePrayerWatcher() {
+  yield takeEvery('prayers/deletePrayer', deletePrayerWorker);
 }
 
 export function* createPrayerWatcher() {

@@ -55,6 +55,17 @@ export const prayersSlice = createSlice({
       state.isError = true;
       console.log(action);
     },
+    deletePrayer: (state, action) => {
+      state.isLoading = true;
+      console.log(action);
+    },
+    deletePrayerSuccess: state => {
+      state.isLoading = false;
+    },
+    deletePrayerFailure: (state, action) => {
+      state.isError = true;
+      console.log(action);
+    },
   },
 });
 
@@ -68,6 +79,9 @@ export const {
   createPrayerSuccess,
   createPrayerFailure,
   setActivePrayerId,
+  deletePrayer,
+  deletePrayerFailure,
+  deletePrayerSuccess,
 } = prayersSlice.actions;
 
 export default prayersSlice.reducer;
