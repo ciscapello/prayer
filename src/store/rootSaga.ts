@@ -6,6 +6,7 @@ import {
 } from './columns/columnsSaga';
 import {
   createCommentWatcher,
+  deleteCommentWatcher,
   getAllCommentsWatcher,
 } from './comments/commentsSaga';
 import {
@@ -29,6 +30,7 @@ function* rootSaga() {
     call(getAllCommentsWatcher),
     call(deletePrayerWatcher),
     call(createCommentWatcher),
+    call(deleteCommentWatcher),
   ]);
   console.log('saga called');
 }

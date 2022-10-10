@@ -2,21 +2,24 @@ import { call, put, retry, takeEvery } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import Api from '../../api';
 import {
+  createCommentsFailure,
   createCommentSuccess,
+  deleteCommentFailure,
+  deleteCommentSuccess,
   getAllComments,
   getAllCommentsFailure,
   getAllCommentsSuccess,
 } from './commentsSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 
-const getAllCommentsApi = () => {
-  const res = Api.get('comments');
-  return res;
-};
-
 type DataType = {
   body: string;
   id: number;
+};
+
+const getAllCommentsApi = () => {
+  const res = Api.get('comments');
+  return res;
 };
 
 const createCommentApi = (data: DataType) => {
@@ -27,6 +30,25 @@ const createCommentApi = (data: DataType) => {
   });
   return res;
 };
+
+const deleteCommentApi = (data: number) => {
+  const res = Api.delete(`comments/${data}`);
+  return res;
+};
+
+function* deleteCommentWorker(action: PayloadAction<number>) {
+  try {
+    const response: AxiosResponse = yield call(
+      deleteCommentApi,
+      action.payload,
+    );
+    yield put(deleteCommentSuccess());
+    yield put(getAllComments());
+    return response;
+  } catch (error) {
+    yield put(deleteCommentFailure(error));
+  }
+}
 
 function* getAllCommentsWorker() {
   try {
@@ -49,8 +71,12 @@ function* createCommentWorker(
     yield put(getAllComments());
     return response;
   } catch (error) {
-    yield put(createCommentFailure());
+    yield put(createCommentsFailure(error));
   }
+}
+
+export function* deleteCommentWatcher() {
+  yield takeEvery('comments/deleteComment', deleteCommentWorker);
 }
 
 export function* createCommentWatcher() {
@@ -59,7 +85,4 @@ export function* createCommentWatcher() {
 
 export function* getAllCommentsWatcher() {
   yield takeEvery('comments/getAllComments', getAllCommentsWorker);
-}
-function createCommentFailure(): any {
-  throw new Error('Function not implemented.');
 }

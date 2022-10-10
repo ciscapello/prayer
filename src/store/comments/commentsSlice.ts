@@ -5,12 +5,14 @@ interface CommentsState {
   comments: IComment[] | [];
   isLoading: boolean;
   isError: boolean;
+  activeCommentId: number | null;
 }
 
 const initialState: CommentsState = {
   comments: [],
   isLoading: false,
   isError: false,
+  activeCommentId: null,
 };
 
 export const commentsSlice = createSlice({
@@ -40,6 +42,21 @@ export const commentsSlice = createSlice({
       state.isLoading = false;
       console.log(action.payload);
     },
+    setActiveMenuId: (state, action) => {
+      state.activeCommentId = action.payload;
+    },
+    deleteComment: (state, action) => {
+      state.isLoading = true;
+      console.log(action);
+    },
+    deleteCommentSuccess: state => {
+      state.isLoading = false;
+    },
+    deleteCommentFailure: (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      console.log(action);
+    },
   },
 });
 
@@ -50,6 +67,10 @@ export const {
   createComment,
   createCommentSuccess,
   createCommentsFailure,
+  setActiveMenuId,
+  deleteComment,
+  deleteCommentSuccess,
+  deleteCommentFailure,
 } = commentsSlice.actions;
 
 export default commentsSlice.reducer;

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { useAppSelector } from '../../hooks';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { deleteComment, setActiveMenuId } from '../../store';
 import { IComment } from '../../types';
 
 interface CommentProps {
@@ -8,25 +9,38 @@ interface CommentProps {
 }
 
 export default function Comment({ item }: CommentProps) {
-  // const username = useAppSelector(state => state.user.username);
   const username = useAppSelector(state => state.user.username);
-  console.log(username ? username : '3424243');
+  const activeCommentId = useAppSelector(
+    state => state.comments.activeCommentId,
+  );
+  const dispatch = useAppDispatch();
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => dispatch(setActiveMenuId(null))}
+      onLongPress={() => dispatch(setActiveMenuId(item.id))}
+      style={styles.container}>
       <Image
         style={styles.avatar}
         source={require('../../shared/assets/pngs/people1.png')}
       />
       <View>
         <View style={styles.usernameContainer}>
-          <Text style={styles.username}>ALALLA</Text>
+          <Text style={styles.username}>{username}</Text>
           <Text style={styles.date}>{item.created}</Text>
         </View>
         <View>
           <Text style={styles.commentBody}>{item.body}</Text>
         </View>
       </View>
-    </View>
+      {activeCommentId === item.id && (
+        <TouchableOpacity
+          style={styles.commentMenu}
+          onPress={() => dispatch(deleteComment(item.id))}>
+          <Text>Delete</Text>
+        </TouchableOpacity>
+      )}
+    </TouchableOpacity>
   );
 }
 
@@ -60,5 +74,20 @@ const styles = StyleSheet.create({
   },
   commentBody: {
     marginTop: 5,
+  },
+  commentMenu: {
+    width: 50,
+    height: 30,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    shadowColor: 'black',
+    shadowOffset: { width: 3, height: 5 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    position: 'absolute',
+    right: 20,
+    top: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

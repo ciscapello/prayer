@@ -2,6 +2,8 @@ import React, { useLayoutEffect } from 'react';
 import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import {
   Image,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { OnePrayerProps } from '../../navigation/deskNavigation';
 import { Message } from '../../shared/assets/svgs';
 import { createComment } from '../../store';
+import { selectCommentsOfPrayer } from '../../store/comments/selectors';
 import { Comment } from '../comment';
 import { Loading } from '../loading';
 import { PrayerCounter } from '../prayerCounter';
@@ -24,13 +27,8 @@ interface CommentFieldValue {
 
 export default function PrayerPage({ route, navigation }: OnePrayerProps) {
   const dispatch = useAppDispatch();
-  // let comments = useAppSelector(selectCommentsOfPrayer);
+  let comments = useAppSelector(selectCommentsOfPrayer);
 
-  let comments = useAppSelector(state => state.comments.comments);
-  comments = comments.filter(
-    comment => comment.prayerId === route.params.prayer.id,
-  );
-  console.log(comments);
   const { title, id } = route.params.prayer;
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -56,8 +54,9 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
   };
 
   return (
-    <>
-      <ScrollView nestedScrollEnabled={true}>
+    <ScrollView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <PrayerCounter />
         <View style={styles.membersContainer}>
           <Text style={styles.membersTitle}>MEMBERS</Text>
@@ -104,13 +103,16 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
             </TouchableOpacity>
           )}
         </View>
-      </ScrollView>
-      <Loading />
-    </>
+        <Loading />
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   membersContainer: {
     paddingHorizontal: 20,
     paddingVertical: 15,
