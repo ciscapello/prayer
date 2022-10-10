@@ -9,11 +9,26 @@ interface CommentProps {
 }
 
 export default function Comment({ item }: CommentProps) {
+  const dispatch = useAppDispatch();
   const username = useAppSelector(state => state.user.username);
   const activeCommentId = useAppSelector(
     state => state.comments.activeCommentId,
   );
-  const dispatch = useAppDispatch();
+
+  const dDate = Math.floor(
+    (+new Date() - Date.parse(item.created)) / 1000 / 60 / 60 / 24,
+  );
+
+  const dateMessage = () => {
+    switch (dDate) {
+      case 0:
+        return 'Today';
+      case 1:
+        return 'One day ago';
+      default:
+        return `${dDate} days ago`;
+    }
+  };
 
   return (
     <TouchableOpacity
@@ -27,7 +42,7 @@ export default function Comment({ item }: CommentProps) {
       <View>
         <View style={styles.usernameContainer}>
           <Text style={styles.username}>{username}</Text>
-          <Text style={styles.date}>{item.created}</Text>
+          <Text style={styles.date}>{dateMessage()}</Text>
         </View>
         <View>
           <Text style={styles.commentBody}>{item.body}</Text>
