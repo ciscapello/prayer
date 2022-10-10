@@ -2,6 +2,7 @@ import { call, put, retry, takeEvery } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import Api from '../../api';
 import {
+  createCommentSuccess,
   getAllComments,
   getAllCommentsFailure,
   getAllCommentsSuccess,
@@ -31,7 +32,6 @@ function* getAllCommentsWorker() {
   try {
     const response: AxiosResponse = yield retry(5, 1000, getAllCommentsApi);
     yield put(getAllCommentsSuccess(response.data));
-    yield console.log('saga success');
   } catch (error) {
     yield put(getAllCommentsFailure(error));
   }
@@ -45,8 +45,8 @@ function* createCommentWorker(
       createCommentApi,
       action.payload,
     );
+    yield put(createCommentSuccess());
     yield put(getAllComments());
-    yield console.log('success');
     return response;
   } catch (error) {
     yield put(createCommentFailure());
