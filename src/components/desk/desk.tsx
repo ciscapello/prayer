@@ -14,6 +14,7 @@ import { fetchColumns } from '../../store/columns';
 import { CreateColumnModal } from '../createColumnModal';
 import { getAllPrayers } from '../../store/prayers/prayersSlice';
 import { getAllComments } from '../../store/comments';
+import { Loading } from '../loading';
 
 export default function Desk() {
   const dispatch = useAppDispatch();
@@ -40,28 +41,31 @@ export default function Desk() {
   }, [dispatch]);
 
   return (
-    <SafeAreaView>
-      <FlatList
-        style={styles.list}
-        data={columns}
-        renderItem={item => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('PrayersMain', {
-                id: item.item.id,
-                title: item.item.title,
-              })
-            }
-            style={styles.column}>
-            <Text style={styles.title}>{item.item.title}</Text>
-          </TouchableOpacity>
-        )}
-      />
-      <CreateColumnModal
-        modalIsShow={modalIsShow}
-        setModalIsShow={setModalIsShow}
-      />
-    </SafeAreaView>
+    <>
+      <SafeAreaView>
+        <FlatList
+          style={styles.list}
+          data={columns}
+          renderItem={item => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('PrayersMain', {
+                  id: item.item.id,
+                  title: item.item.title,
+                })
+              }
+              style={styles.column}>
+              <Text style={styles.title}>{item.item.title}</Text>
+            </TouchableOpacity>
+          )}
+        />
+        <CreateColumnModal
+          modalIsShow={modalIsShow}
+          setModalIsShow={setModalIsShow}
+        />
+      </SafeAreaView>
+      <Loading />
+    </>
   );
 }
 

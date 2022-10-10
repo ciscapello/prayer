@@ -14,6 +14,7 @@ import {
 import { LoginStackParams } from '../../navigation/loginNavigation';
 import { useAppDispatch } from '../../hooks';
 import { signInFetch } from '../../store';
+import { Loading } from '../loading';
 
 export interface SignInFormValues {
   email: string;
@@ -42,57 +43,62 @@ export default function SignIn() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.wrapper}>
-        <Text style={styles.title}>Sign in</Text>
-        <Controller
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              textContentType="emailAddress"
-              onChangeText={val => onChange(val)}
-              value={value}
-              autoCapitalize="none"
-            />
+    <>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.wrapper}>
+          <Text style={styles.title}>Sign in</Text>
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                textContentType="emailAddress"
+                onChangeText={val => onChange(val)}
+                value={value}
+                autoCapitalize="none"
+              />
+            )}
+            name="email"
+            rules={{
+              required: true,
+              pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+            }}
+          />
+          {errors.email && (
+            <Text style={styles.error}>Enter existing email</Text>
           )}
-          name="email"
-          rules={{
-            required: true,
-            pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-          }}
-        />
-        {errors.email && <Text style={styles.error}>Enter existing email</Text>}
-        <Controller
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              onChangeText={val => onChange(val)}
-              value={value}
-              textContentType="password"
-              autoCapitalize="none"
-            />
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                onChangeText={val => onChange(val)}
+                value={value}
+                textContentType="password"
+                autoCapitalize="none"
+              />
+            )}
+            name="password"
+            rules={{ minLength: 6 }}
+          />
+          {errors.password && (
+            <Text style={styles.error}>Password must be minimum 6 symbols</Text>
           )}
-          name="password"
-          rules={{ minLength: 6 }}
-        />
-        {errors.password && (
-          <Text style={styles.error}>Password must be minimum 6 symbols</Text>
-        )}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleSubmit(onSubmit)}>
-          <Text style={styles.buttonText}>Done</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.signIn}>
-        <Text style={styles.signInText}>Have no account?</Text>
-        <Button onPress={() => navigation.goBack()} title="Sign up" />
-      </View>
-    </SafeAreaView>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleSubmit(onSubmit)}>
+            <Text style={styles.buttonText}>Done</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.signIn}>
+          <Text style={styles.signInText}>Have no account?</Text>
+          <Button onPress={() => navigation.goBack()} title="Sign up" />
+        </View>
+      </SafeAreaView>
+      <Loading />
+    </>
   );
 }
 

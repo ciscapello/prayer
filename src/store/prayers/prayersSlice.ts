@@ -42,6 +42,7 @@ export const prayersSlice = createSlice({
     },
     toggleCheckedPrayerFailure: (state, action) => {
       state.isError = true;
+      state.isLoading = false;
       console.log(action);
     },
     createPrayer: (state, action) => {
@@ -53,6 +54,7 @@ export const prayersSlice = createSlice({
     },
     createPrayerFailure: (state, action) => {
       state.isError = true;
+      state.isLoading = false;
       console.log(action);
     },
     deletePrayer: (state, action) => {
@@ -64,6 +66,7 @@ export const prayersSlice = createSlice({
     },
     deletePrayerFailure: (state, action) => {
       state.isError = true;
+      state.isLoading = false;
       console.log(action);
     },
   },

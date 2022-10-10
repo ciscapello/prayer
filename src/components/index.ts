@@ -10,3 +10,4 @@ export { PrayerPage } from './prayerPage';
 export { PrayerHeader } from './prayerHeader';
 export { PrayerCounter } from './prayerCounter';
 export { Comment } from './comment';
+export { Loading } from './loading';

@@ -29,6 +29,7 @@ export const columnsSlice = createSlice({
     },
     fetchColumnsFailure: (state, action) => {
       state.isError = true;
+      state.isLoading = false;
       console.log(action);
     },
     createColumn: (state, action) => {
@@ -42,6 +43,7 @@ export const columnsSlice = createSlice({
       console.log(action);
       state.isLoading = false;
       state.isError = true;
+      state.isLoading = false;
     },
     setActiveColumnId: (state, action) => {
       state.activeColumnId = action.payload;
@@ -54,6 +56,7 @@ export const columnsSlice = createSlice({
     },
     deleteColumnFailure: state => {
       state.isError = true;
+      state.isLoading = false;
     },
     updateColumn: (state, action) => {
       state.isLoading = true;
@@ -64,6 +67,7 @@ export const columnsSlice = createSlice({
     },
     updateColumnFailure: (state, action) => {
       state.isError = true;
+      state.isLoading = false;
       console.log(action);
     },
   },

@@ -37,6 +37,7 @@ export const commentsSlice = createSlice({
     },
     createCommentsFailure: (state, action) => {
       state.isError = true;
+      state.isLoading = false;
       console.log(action.payload);
     },
   },

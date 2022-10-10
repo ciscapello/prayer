@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLeading } from 'redux-saga/effects';
+import { call, put, retry, takeEvery, takeLeading } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import {
   createPrayerFailure,
@@ -50,7 +50,12 @@ function* createPrayerWorker(
   action: PayloadAction<{ title: string; id: number }>,
 ) {
   try {
-    const response: AxiosResponse = yield call(createPrayerApi, action.payload);
+    const response: AxiosResponse = yield retry(
+      5,
+      1000,
+      createPrayerApi,
+      action.payload,
+    );
     yield put(createPrayerSuccess());
     yield put(getAllPrayers());
     return response;

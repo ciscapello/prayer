@@ -16,6 +16,7 @@ import {
 import { PrayerRow } from '../prayerRow';
 import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { createPrayer } from '../../store/prayers/prayersSlice';
+import { Loading } from '../loading';
 
 interface PrayersProps {
   id: number;
@@ -54,51 +55,54 @@ export default function Prayers({ id }: PrayersProps) {
   });
 
   return (
-    <ScrollView>
-      <View style={styles.addView}>
-        <Text style={styles.plus}>+</Text>
-        <Controller
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextInput
-              style={styles.input}
-              placeholder="Add a prayer..."
-              onChangeText={val => onChange(val)}
-              value={value}
-              placeholderTextColor={'#9C9C9C'}
-            />
-          )}
-          name="title"
-        />
-      </View>
-      {title && (
-        <TouchableOpacity
-          style={styles.sendButton}
-          onPress={handleSubmit(onSubmit)}>
-          <Text style={styles.buttonText}>SEND</Text>
-        </TouchableOpacity>
-      )}
+    <>
+      <ScrollView>
+        <View style={styles.addView}>
+          <Text style={styles.plus}>+</Text>
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <TextInput
+                style={styles.input}
+                placeholder="Add a prayer..."
+                onChangeText={val => onChange(val)}
+                value={value}
+                placeholderTextColor={'#9C9C9C'}
+              />
+            )}
+            name="title"
+          />
+        </View>
+        {title && (
+          <TouchableOpacity
+            style={styles.sendButton}
+            onPress={handleSubmit(onSubmit)}>
+            <Text style={styles.buttonText}>SEND</Text>
+          </TouchableOpacity>
+        )}
 
-      <View style={styles.prayersContainer}>
-        {notAnsweredPrayers.map(item => (
-          <PrayerRow prayer={item} key={item.id} />
-        ))}
-      </View>
-      <TouchableOpacity
-        style={styles.showButton}
-        onPress={() => setAnsweredPrayersIsShow(!answeredPrayersIsShow)}>
-        <Text style={styles.buttonText}>
-          {answeredPrayersIsShow ? 'HIDE' : 'SHOW'} ANSWERED PRAYERS
-        </Text>
-      </TouchableOpacity>
-      {answeredPrayersIsShow ? (
         <View style={styles.prayersContainer}>
-          {answeredPrayers.map(item => (
+          {notAnsweredPrayers.map(item => (
             <PrayerRow prayer={item} key={item.id} />
           ))}
         </View>
-      ) : null}
-    </ScrollView>
+        <TouchableOpacity
+          style={styles.showButton}
+          onPress={() => setAnsweredPrayersIsShow(!answeredPrayersIsShow)}>
+          <Text style={styles.buttonText}>
+            {answeredPrayersIsShow ? 'HIDE' : 'SHOW'} ANSWERED PRAYERS
+          </Text>
+        </TouchableOpacity>
+        {answeredPrayersIsShow ? (
+          <View style={styles.prayersContainer}>
+            {answeredPrayers.map(item => (
+              <PrayerRow prayer={item} key={item.id} />
+            ))}
+          </View>
+        ) : null}
+      </ScrollView>
+      <Loading />
+    </>
   );
 }
 

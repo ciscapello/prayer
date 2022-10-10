@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, retry, takeEvery } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import Api from '../../api';
 import {
@@ -29,7 +29,7 @@ const createCommentApi = (data: DataType) => {
 
 function* getAllCommentsWorker() {
   try {
-    const response: AxiosResponse = yield call(getAllCommentsApi);
+    const response: AxiosResponse = yield retry(5, 1000, getAllCommentsApi);
     yield put(getAllCommentsSuccess(response.data));
     yield console.log('saga success');
   } catch (error) {

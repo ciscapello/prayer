@@ -14,6 +14,7 @@ import { OnePrayerProps } from '../../navigation/deskNavigation';
 import { Message } from '../../shared/assets/svgs';
 import { createComment } from '../../store';
 import { Comment } from '../comment';
+import { Loading } from '../loading';
 import { PrayerCounter } from '../prayerCounter';
 import { PrayerHeader } from '../prayerHeader';
 
@@ -55,54 +56,57 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
   };
 
   return (
-    <ScrollView nestedScrollEnabled={true}>
-      <PrayerCounter />
-      <View style={styles.membersContainer}>
-        <Text style={styles.membersTitle}>MEMBERS</Text>
-        <View style={styles.images}>
-          <Image
-            style={styles.avatar}
-            source={require('../../shared/assets/pngs/people1.png')}
-          />
-          <Image
-            style={styles.avatar}
-            source={require('../../shared/assets/pngs/people2.png')}
-          />
-          <View style={styles.plusContainer}>
-            <Text style={styles.plus}>+</Text>
+    <>
+      <ScrollView nestedScrollEnabled={true}>
+        <PrayerCounter />
+        <View style={styles.membersContainer}>
+          <Text style={styles.membersTitle}>MEMBERS</Text>
+          <View style={styles.images}>
+            <Image
+              style={styles.avatar}
+              source={require('../../shared/assets/pngs/people1.png')}
+            />
+            <Image
+              style={styles.avatar}
+              source={require('../../shared/assets/pngs/people2.png')}
+            />
+            <View style={styles.plusContainer}>
+              <Text style={styles.plus}>+</Text>
+            </View>
           </View>
         </View>
-      </View>
-      <View style={styles.commentsContainer}>
-        <Text style={styles.commentsTitle}>COMMENTS</Text>
-        {comments.map(element => (
-          <Comment item={element} key={element.id} />
-        ))}
-        <View style={styles.inputContainer}>
-          <Message style={styles.image} width={24} height={24} />
-          <Controller
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <TextInput
-                style={styles.input}
-                placeholder="Add a comment..."
-                onChangeText={val => onChange(val)}
-                value={value}
-                placeholderTextColor={'#9C9C9C'}
-              />
-            )}
-            name="body"
-          />
+        <View style={styles.commentsContainer}>
+          <Text style={styles.commentsTitle}>COMMENTS</Text>
+          {comments.map(element => (
+            <Comment item={element} key={element.id} />
+          ))}
+          <View style={styles.inputContainer}>
+            <Message style={styles.image} width={24} height={24} />
+            <Controller
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  placeholder="Add a comment..."
+                  onChangeText={val => onChange(val)}
+                  value={value}
+                  placeholderTextColor={'#9C9C9C'}
+                />
+              )}
+              name="body"
+            />
+          </View>
+          {comment && (
+            <TouchableOpacity
+              onPress={handleSubmit(onSubmit)}
+              style={styles.sendButton}>
+              <Text style={styles.buttonText}>SEND</Text>
+            </TouchableOpacity>
+          )}
         </View>
-        {comment && (
-          <TouchableOpacity
-            onPress={handleSubmit(onSubmit)}
-            style={styles.sendButton}>
-            <Text style={styles.buttonText}>SEND</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Loading />
+    </>
   );
 }
 
