@@ -191,9 +191,6 @@ const styles = StyleSheet.create({
   },
   iconBox: {
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: 'black',
-    borderStyle: 'solid',
     marginLeft: 'auto',
   },
   wrapper: {
