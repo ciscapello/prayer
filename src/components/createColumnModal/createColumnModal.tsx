@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useAppDispatch } from '../../hooks';
 import { createColumn } from '../../store/columns';
+import { Color } from '../../utils';
 
 interface CreateColumnModalProps {
   modalIsShow: boolean;
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
     padding: 35,
     width: '80%',
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: '',
     shadowOffset: {
       width: 2,
       height: 3,
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 15,
-    backgroundColor: '#BFB393',
+    backgroundColor: `${Color.KHAKI}`,
     borderRadius: 20,
     flex: 1,
     justifyContent: 'center',
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: `${Color.RICH_BRILLIANT_LAVENDER}`,
   },
   textStyle: {
     color: 'white',

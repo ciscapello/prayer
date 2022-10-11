@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { deleteComment, setActiveMenuId } from '../../store';
 import { IComment } from '../../types';
+import { Color } from '../../utils';
 
 interface CommentProps {
   item: IComment;
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: '#E5E5E5',
+    borderColor: `${Color.PLATINUM}`,
     padding: 15,
     flexDirection: 'row',
   },
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   },
   date: {
     marginLeft: 10,
-    color: '#9C9C9C',
+    color: `${Color.SPANISH_GRAY}`,
     fontSize: 13,
     lineHeight: 16,
   },

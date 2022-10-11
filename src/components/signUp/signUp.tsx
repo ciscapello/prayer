@@ -16,6 +16,7 @@ import {
 import { useAppDispatch } from '../../hooks';
 import { LoginStackParams } from '../../navigation/loginNavigation';
 import { signUpFetch } from '../../store';
+import { Color, emailValidation } from '../../utils';
 import { Loading } from '../loading';
 
 export interface SignUpFieldValues {
@@ -82,7 +83,7 @@ export default function SignUp() {
             name="email"
             rules={{
               required: true,
-              pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+              pattern: emailValidation,
             }}
           />
           {errors.email && (
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 15,
-    backgroundColor: '#BFB393',
+    backgroundColor: `${Color.KHAKI}`,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',

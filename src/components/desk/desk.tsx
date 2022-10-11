@@ -15,6 +15,7 @@ import { CreateColumnModal } from '../createColumnModal';
 import { getAllPrayers } from '../../store/prayers/prayersSlice';
 import { getAllComments } from '../../store/comments';
 import { Loading } from '../loading';
+import { Color } from '../../utils';
 
 export default function Desk() {
   const dispatch = useAppDispatch();
@@ -89,11 +90,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#514D47',
+    color: `${Color.DARK_LIVER}`,
   },
 
   plus: {
-    color: '#72A8BC',
+    color: `${Color.MOONSTONE_BLUE}`,
     fontSize: 36,
     lineHeight: 34,
   },

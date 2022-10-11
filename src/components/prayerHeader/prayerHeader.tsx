@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Prayer } from '../../shared/assets/svgs';
 import { Back } from '../../shared/assets/svgs';
+import { Color } from '../../utils';
 
 interface PrayerHeaderProps {
   title: string;
@@ -27,7 +28,7 @@ export default function PrayerHeader({ title }: PrayerHeaderProps) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#BFB393',
+    backgroundColor: `${Color.KHAKI}`,
     width: '100%',
     height: 170,
     paddingTop: 40,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     height: 40,
     flexDirection: 'row',
-    borderBottomColor: '#E5E5E5',
+    borderBottomColor: `${Color.PLATINUM}`,
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
     backgroundColor: 'white',
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: 17,
     lineHeight: 20,
-    color: '#514D47',
+    color: `${Color.DARK_LIVER}`,
     paddingLeft: 10,
   },
   status: {

@@ -7,6 +7,7 @@ import { Prayers, Subscribed, UpdateColumnModal } from '../components';
 import { PrayersMainProps } from './deskNavigation';
 import { TouchableOpacity } from 'react-native';
 import { Settings } from '../shared/assets/svgs';
+import { Color } from '../utils';
 
 export type TabNavigationParams = {
   Prayers: undefined;
@@ -48,8 +49,8 @@ export default function PrayersMain({ route, navigation }: PrayersMainProps) {
         screenOptions={{
           tabBarLabelStyle: { fontSize: 13, fontWeight: '600' },
           tabBarPressOpacity: 0.5,
-          tabBarActiveTintColor: '#72A8BC',
-          tabBarIndicatorStyle: { backgroundColor: '#72A8BC' },
+          tabBarActiveTintColor: `${Color.MOONSTONE_BLUE}`,
+          tabBarIndicatorStyle: { backgroundColor: `${Color.MOONSTONE_BLUE}` },
         }}>
         <Tab.Screen
           options={{ title: 'MY PRAYERS' }}

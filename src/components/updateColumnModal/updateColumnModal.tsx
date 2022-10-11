@@ -3,6 +3,7 @@ import React from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAppDispatch } from '../../hooks';
 import { deleteColumn } from '../../store/columns';
+import { Color } from '../../utils';
 
 interface CreateColumnModalProps {
   modalIsShow: boolean;
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   button: {
     marginLeft: 15,
     marginRight: 15,
-    backgroundColor: '#BFB393',
+    backgroundColor: `${Color.KHAKI}`,
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: `${Color.MOONSTONE_BLUE}`,
   },
   textStyle: {
     color: 'white',

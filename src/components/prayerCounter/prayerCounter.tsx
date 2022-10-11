@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Color } from '../../utils';
 
 export default function PrayerCounter() {
   return (
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
   flexItem: {
     width: '50%',
     borderStyle: 'solid',
-    borderColor: '#E5E5E5',
+    borderColor: `${Color.PLATINUM}`,
     borderWidth: 0.5,
     paddingHorizontal: 15,
     paddingVertical: 26,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     lineHeight: 38,
-    color: '#BFB393',
+    color: `${Color.KHAKI}`,
   },
   subTitle: {
     fontSize: 13,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
   },
   dateTitle: {
-    color: '#BFB393',
+    color: `${Color.KHAKI}`,
     fontSize: 22,
     lineHeight: 26,
     marginBottom: 6,
@@ -57,6 +58,6 @@ const styles = StyleSheet.create({
   small: {
     fontSize: 13,
     lineHeight: 15,
-    color: '#72A8BC',
+    color: `${Color.MOONSTONE_BLUE}`,
   },
 });

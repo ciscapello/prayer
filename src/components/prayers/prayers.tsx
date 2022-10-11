@@ -17,6 +17,7 @@ import { PrayerRow } from '../prayerRow';
 import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { createPrayer } from '../../store/prayers/prayersSlice';
 import { Loading } from '../loading';
+import { Color } from '../../utils';
 
 interface PrayersProps {
   id: number;
@@ -67,7 +68,7 @@ export default function Prayers({ id }: PrayersProps) {
                 placeholder="Add a prayer..."
                 onChangeText={val => onChange(val)}
                 value={value}
-                placeholderTextColor={'#9C9C9C'}
+                placeholderTextColor={`${Color.SPANISH_GRAY}`}
               />
             )}
             name="title"
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 17,
     borderRadius: 10,
-    borderColor: '#c8c8c8',
+    borderColor: `${Color.PLATINUM}`,
     borderWidth: 1,
     borderStyle: 'solid',
     alignSelf: 'center',
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   plus: {
-    color: '#72A8BC',
+    color: `${Color.MOONSTONE_BLUE}`,
     fontSize: 44,
     position: 'absolute',
     left: 10,
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
   },
   showButton: {
     marginTop: 15,
-    backgroundColor: '#BFB393',
+    backgroundColor: `${Color.KHAKI}`,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
   },
   sendButton: {
     marginTop: 5,
-    backgroundColor: '#BFB393',
+    backgroundColor: `${Color.KHAKI}`,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',

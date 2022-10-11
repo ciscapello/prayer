@@ -17,6 +17,7 @@ import { LoginStackParams } from '../../navigation/loginNavigation';
 import { useAppDispatch } from '../../hooks';
 import { signInFetch } from '../../store';
 import { Loading } from '../loading';
+import { Color } from '../../utils';
 
 export interface SignInFormValues {
   email: string;
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 15,
-    backgroundColor: '#BFB393',
+    backgroundColor: `${Color.KHAKI}`,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',

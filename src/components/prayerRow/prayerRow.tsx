@@ -25,6 +25,7 @@ import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
+import { Color } from '../../utils';
 
 interface PrayerRowProps {
   prayer: Prayer;
@@ -116,8 +117,8 @@ function PrayerRow({ prayer }: PrayerRowProps) {
                   onAnimationType="fade"
                   offAnimationType="fade"
                   animationDuration={0.1}
-                  tintColors={{ true: '#333333', false: '#000' }}
-                  onCheckColor={'#000'}
+                  tintColors={{ true: 'black', false: 'black' }}
+                  onCheckColor={'black'}
                   onChange={onChange}
                 />
               </View>
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   container: {
     height: 68,
     width: '100%',
-    borderBottomColor: '#E5E5E5',
+    borderBottomColor: `${Color.PLATINUM}`,
     borderBottomWidth: 1,
     borderLeftStyle: 'solid',
     alignItems: 'center',

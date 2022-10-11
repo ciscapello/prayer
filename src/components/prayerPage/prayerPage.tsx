@@ -21,6 +21,7 @@ import { PrayerCounter } from '../prayerCounter';
 import { PrayerHeader } from '../prayerHeader';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Color } from '../../utils';
 
 interface CommentFieldValue {
   body: string;
@@ -97,7 +98,7 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
                   placeholder="Add a comment..."
                   onChangeText={val => onChange(val)}
                   value={value}
-                  placeholderTextColor={'#9C9C9C'}
+                  placeholderTextColor={`${Color.SPANISH_GRAY}`}
                 />
               )}
               name="body"
@@ -129,14 +130,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 15,
     fontWeight: '600',
-    color: '#72A8BC',
+    color: `${Color.MOONSTONE_BLUE}`,
     marginBottom: 15,
   },
   commentsTitle: {
     fontSize: 13,
     lineHeight: 15,
     fontWeight: '600',
-    color: '#72A8BC',
+    color: `${Color.MOONSTONE_BLUE}`,
     marginBottom: 15,
     paddingLeft: 20,
   },
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#BFB393',
+    backgroundColor: `${Color.KHAKI}`,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   sendButton: {
-    backgroundColor: '#BFB393',
+    backgroundColor: `${Color.KHAKI}`,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
