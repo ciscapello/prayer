@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAppDispatch } from '../../hooks';
-import { deleteColumn } from '../../store/columns';
+import { deleteColumn } from '../../store';
 import { Color } from '../../utils';
 
 interface CreateColumnModalProps {

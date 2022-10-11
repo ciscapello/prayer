@@ -1,7 +1,7 @@
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import React from 'react';
 import {
   Button,
   Platform,
@@ -17,7 +17,7 @@ import { LoginStackParams } from '../../navigation/loginNavigation';
 import { useAppDispatch } from '../../hooks';
 import { signInFetch } from '../../store';
 import { Loading } from '../loading';
-import { Color } from '../../utils';
+import { Color, emailValidation } from '../../utils';
 
 export interface SignInFormValues {
   email: string;
@@ -65,7 +65,7 @@ export default function SignIn() {
             name="email"
             rules={{
               required: true,
-              pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+              pattern: emailValidation,
             }}
           />
           {errors.email && (

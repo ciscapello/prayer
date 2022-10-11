@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { useAppDispatch } from '../../hooks';
-import { createColumn } from '../../store/columns';
+import { createColumn } from '../../store';
 import { Color } from '../../utils';
 
 interface CreateColumnModalProps {

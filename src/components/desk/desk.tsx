@@ -1,5 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   Text,
@@ -8,14 +8,12 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { DeskStackParams } from '../../navigation/deskNavigation';
-import { fetchColumns } from '../../store/columns';
 import { CreateColumnModal } from '../createColumnModal';
-import { getAllPrayers } from '../../store/prayers/prayersSlice';
-import { getAllComments } from '../../store/comments';
-import { Loading } from '../loading';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getAllPrayers, getAllComments, fetchColumns } from '../../store';
 import { Color } from '../../utils';
+import { DeskStackParams } from '../../navigation';
+import { Loading } from '../loading';
 
 export default function Desk() {
   const dispatch = useAppDispatch();

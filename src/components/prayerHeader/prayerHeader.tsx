@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Prayer } from '../../shared/assets/svgs';
-import { Back } from '../../shared/assets/svgs';
+import { Prayer, Back } from '../../shared/assets/svgs';
 import { Color } from '../../utils';
 
 interface PrayerHeaderProps {

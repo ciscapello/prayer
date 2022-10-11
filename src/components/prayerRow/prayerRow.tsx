@@ -10,7 +10,7 @@ import {
   toggleCheckedPrayer,
 } from '../../store/prayers/prayersSlice';
 import { useNavigation } from '@react-navigation/native';
-import { PrayersScreenNavigationProps } from '../../navigation/deskNavigation';
+import { PrayersScreenNavigationProps } from '../../navigation';
 import Animated, {
   Extrapolate,
   interpolate,

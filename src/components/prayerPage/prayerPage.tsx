@@ -11,14 +11,15 @@ import {
   View,
 } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { OnePrayerProps } from '../../navigation/deskNavigation';
+import { OnePrayerProps } from '../../navigation';
 import { Message } from '../../shared/assets/svgs';
-import { createComment } from '../../store';
-import { selectCommentsOfPrayer } from '../../store/comments/selectors';
-import { Comment } from '../comment';
-import { Loading } from '../loading';
-import { PrayerCounter } from '../prayerCounter';
-import { PrayerHeader } from '../prayerHeader';
+import { createComment, selectCommentsOfPrayer } from '../../store';
+import {
+  Comment,
+  Loading,
+  PrayerCounter,
+  PrayerHeader,
+} from '../../components';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Color } from '../../utils';

@@ -8,15 +8,14 @@ import {
   View,
 } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setActiveColumnId } from '../../store/columns';
-import {
-  selectAnsweredPrayersByColumnId,
-  selectNotAnsweredPrayersByColumnId,
-} from '../../store/prayers/selectors';
-import { PrayerRow } from '../prayerRow';
+import { PrayerRow, Loading } from '../../components';
 import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
-import { createPrayer } from '../../store/prayers/prayersSlice';
-import { Loading } from '../loading';
+import {
+  createPrayer,
+  setActiveColumnId,
+  selectNotAnsweredPrayersByColumnId,
+  selectAnsweredPrayersByColumnId,
+} from '../../store';
 import { Color } from '../../utils';
 
 interface PrayersProps {
