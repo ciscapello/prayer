@@ -12,7 +12,7 @@ export default function PrayerHeader({ title }: PrayerHeaderProps) {
     <>
       <View style={styles.container}>
         <View style={styles.icons}>
-          <Back width={30} height={30} stroke={'#fff'} />
+          <Back width={30} height={30} fill={'#fff'} />
           <Prayer width={30} height={30} fill={'#fff'} />
         </View>
         <Text style={styles.title}>{title}</Text>

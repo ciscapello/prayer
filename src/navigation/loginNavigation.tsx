@@ -16,7 +16,7 @@ export default function LoginNavigation() {
       <Stack.Screen
         name="SignUp"
         component={SignUp}
-        options={{ title: 'Welcome' }}
+        options={{ title: 'Welcome', headerTitleAlign: 'center' }}
       />
       <Stack.Screen name="SignIn" component={SignIn} options={{ title: '' }} />
     </Stack.Navigator>

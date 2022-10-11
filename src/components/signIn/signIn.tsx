@@ -4,6 +4,8 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import React from 'react';
 import {
   Button,
+  Platform,
+  Pressable,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -94,7 +96,15 @@ export default function SignIn() {
         </View>
         <View style={styles.signIn}>
           <Text style={styles.signInText}>Have no account?</Text>
-          <Button onPress={() => navigation.goBack()} title="Sign up" />
+          {Platform.OS === 'ios' ? (
+            <Button onPress={() => navigation.goBack()} title="Sign up" />
+          ) : (
+            <Pressable
+              style={styles.androidButton}
+              onPress={() => navigation.navigate('SignUp')}>
+              <Text style={styles.androidButtonText}>Sign up</Text>
+            </Pressable>
+          )}
         </View>
       </SafeAreaView>
       <Loading />
@@ -103,6 +113,14 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
+  androidButtonText: {
+    color: '#007AFF',
+  },
+  androidButton: {
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   container: {
     alignItems: 'center',
     justifyContent: 'center',

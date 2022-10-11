@@ -49,6 +49,7 @@ export default function PrayersMain({ route, navigation }: PrayersMainProps) {
           tabBarLabelStyle: { fontSize: 13, fontWeight: '600' },
           tabBarPressOpacity: 0.5,
           tabBarActiveTintColor: '#72A8BC',
+          tabBarIndicatorStyle: { backgroundColor: '#72A8BC' },
         }}>
         <Tab.Screen
           options={{ title: 'MY PRAYERS' }}

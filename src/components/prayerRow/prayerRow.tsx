@@ -11,7 +11,6 @@ import {
 } from '../../store/prayers/prayersSlice';
 import { useNavigation } from '@react-navigation/native';
 import { PrayersScreenNavigationProps } from '../../navigation/deskNavigation';
-
 import Animated, {
   Extrapolate,
   interpolate,
@@ -22,6 +21,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {
+  gestureHandlerRootHOC,
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
@@ -34,7 +34,7 @@ type ContextType = {
   translateX: number;
 };
 
-export default function PrayerRow({ prayer }: PrayerRowProps) {
+function PrayerRow({ prayer }: PrayerRowProps) {
   const dispatch = useAppDispatch();
   const navigation = useNavigation<PrayersScreenNavigationProps>();
 
@@ -100,7 +100,9 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
   };
 
   return (
-    <PanGestureHandler onGestureEvent={panGestureEvent}>
+    <PanGestureHandler
+      activeOffsetX={[-10, 10]}
+      onGestureEvent={panGestureEvent}>
       <Animated.View style={[rStyle]}>
         <View style={styles.container}>
           <View>
@@ -114,7 +116,7 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
                   onAnimationType="fade"
                   offAnimationType="fade"
                   animationDuration={0.1}
-                  tintColors={{ true: '#000', false: '#000' }}
+                  tintColors={{ true: '#333333', false: '#000' }}
                   onCheckColor={'#000'}
                   onChange={onChange}
                 />
@@ -133,7 +135,7 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
                 </Text>
               </TouchableOpacity>
               <View style={styles.iconBox}>
-                <User width={40} height={40} />
+                <User height={24} width={24} />
                 <PrayerIcon width={40} height={40} fill={'#72A8BC'} />
               </View>
             </View>
@@ -148,6 +150,8 @@ export default function PrayerRow({ prayer }: PrayerRowProps) {
     </PanGestureHandler>
   );
 }
+
+export default gestureHandlerRootHOC(PrayerRow);
 
 const styles = StyleSheet.create({
   checkbox: {

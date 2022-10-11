@@ -1,5 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
-import store from '../store';
+// import store from '../store';
+
+let store: any;
+
+export const injectStore = (_store: any) => {
+  store = _store;
+};
 
 const baseUrl = 'https://prayer.herokuapp.com/';
 

@@ -40,24 +40,19 @@ export default function DeskNavigation() {
         component={Desk}
         options={{
           title: 'My Desk',
+          headerTitleAlign: 'center',
         }}
       />
       <Stack.Screen
         name="PrayersMain"
         component={PrayersMain}
         options={{
-          title: 'To do',
           headerLeft: () => <Text />,
           headerShadowVisible: false,
+          headerTitleAlign: 'center',
         }}
       />
-      <Stack.Screen
-        name="OnePrayer"
-        component={PrayerPage}
-        options={{
-          headerLeft: () => <Text>adsas</Text>,
-        }}
-      />
+      <Stack.Screen name="OnePrayer" component={PrayerPage} />
     </Stack.Navigator>
   );
 }

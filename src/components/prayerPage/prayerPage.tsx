@@ -4,7 +4,6 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -20,6 +19,8 @@ import { Comment } from '../comment';
 import { Loading } from '../loading';
 import { PrayerCounter } from '../prayerCounter';
 import { PrayerHeader } from '../prayerHeader';
+import { useHeaderHeight } from '@react-navigation/elements';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface CommentFieldValue {
   body: string;
@@ -35,12 +36,15 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
       header: () => <PrayerHeader title={title} />,
     });
   }, [navigation, title, id, dispatch]);
+
   const { control, handleSubmit, reset } = useForm<CommentFieldValue>({
     mode: 'onChange',
     defaultValues: {
       body: '',
     },
   });
+
+  const headerHeight = useHeaderHeight();
 
   const comment = useWatch({
     control,
@@ -56,7 +60,11 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
   return (
     <ScrollView style={styles.container}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        keyboardVerticalOffset={Platform.select({
+          ios: headerHeight,
+          android: 0,
+        })}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
         <PrayerCounter />
         <View style={styles.membersContainer}>
           <Text style={styles.membersTitle}>MEMBERS</Text>
@@ -178,6 +186,7 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: '5%',
     height: 30,
+    marginBottom: 30,
   },
   buttonText: {
     color: 'white',

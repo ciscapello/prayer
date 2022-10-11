@@ -27,7 +27,7 @@ const SvgBack = (props: SvgProps) => (
       />
     </Mask>
     <G mask="url(#back_svg__a)">
-      <Path fill="#fff" d="M-3-4h24v24H-3z" />
+      <Path fill="#A369EC" d="M-3-4h24v24H-3z" />
     </G>
   </Svg>
 );
