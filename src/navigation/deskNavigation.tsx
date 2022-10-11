@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native-stack';
 import { Desk, PrayerPage } from '../components';
 import { Text } from 'react-native';
-import PrayersMain from './tabNavigation';
+import PrayersMain from './prayersMainTabNavigation';
 import { Prayer } from '../types';
 
 export type DeskStackParams = {

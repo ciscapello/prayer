@@ -26,7 +26,10 @@ export type SubscribedTabScreenProps = MaterialTopTabScreenProps<
   'Subscribed'
 >;
 
-export default function PrayersMain({ route, navigation }: PrayersMainProps) {
+export default function PrayersMainTabNavigation({
+  route,
+  navigation,
+}: PrayersMainProps) {
   const [modalIsShow, setModalIsShow] = useState(false);
   React.useLayoutEffect(() => {
     navigation.setOptions({
