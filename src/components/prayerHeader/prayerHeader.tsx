@@ -1,6 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Prayer, Back } from '../../shared/assets/svgs';
+import { Back, Prayer } from '../../shared/assets/svgs';
 import { Color } from '../../utils';
 
 interface PrayerHeaderProps {
@@ -8,12 +9,16 @@ interface PrayerHeaderProps {
 }
 
 export default function PrayerHeader({ title }: PrayerHeaderProps) {
+  const navigation = useNavigation();
+  const onPress = () => {
+    navigation.goBack();
+  };
   return (
     <>
       <View style={styles.container}>
         <View style={styles.icons}>
-          <Back width={30} height={30} fill={'#fff'} />
-          <Prayer width={30} height={30} fill={'#fff'} />
+          <Back width={40} height={40} fill={'#fff'} onPress={onPress} />
+          <Prayer width={40} height={40} fill={'#fff'} />
         </View>
         <Text style={styles.title}>{title}</Text>
       </View>
@@ -42,6 +47,7 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 15,
   },
   footer: {

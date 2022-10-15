@@ -17,7 +17,7 @@ export default function Subscribed({ id }: SubscribedProps) {
     <ScrollView style={styles.prayersContainer}>
       <>
         {prayers.map(item => (
-          <PrayerRow prayer={item} />
+          <PrayerRow prayer={item} key={item.id} />
         ))}
       </>
     </ScrollView>

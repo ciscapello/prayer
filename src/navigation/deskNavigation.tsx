@@ -5,7 +5,6 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import { Desk, PrayerPage } from '../components';
-import { Text } from 'react-native';
 import PrayersMain from './prayersMainTabNavigation';
 import { Prayer } from '../types';
 
@@ -47,7 +46,6 @@ export default function DeskNavigation() {
         name="PrayersMain"
         component={PrayersMain}
         options={{
-          headerLeft: () => <Text />,
           headerShadowVisible: false,
           headerTitleAlign: 'center',
         }}
