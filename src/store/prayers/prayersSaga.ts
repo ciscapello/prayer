@@ -16,12 +16,10 @@ import { PayloadAction } from '@reduxjs/toolkit';
 
 const getAllPrayersApi = () => {
   const res = Api.get('prayers');
-  console.log(res);
   return res;
 };
 
 const checkPrayerApi = (prayer: Prayer) => {
-  console.log(prayer);
   const res = Api.put(`prayers/${prayer.id}`, {
     title: prayer.title,
     description: prayer.description,

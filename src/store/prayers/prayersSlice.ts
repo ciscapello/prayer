@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Prayer } from '../../types';
 
@@ -20,7 +21,6 @@ export const prayersSlice = createSlice({
   initialState,
   reducers: {
     setActivePrayerId: (state, action) => {
-      console.log('active prayer id', action.payload);
       state.activePrayerId = action.payload;
     },
     getAllPrayers: state => {
@@ -33,7 +33,6 @@ export const prayersSlice = createSlice({
     getAllPrayersFailure: (state, action) => {
       state.isLoading = false;
       state.isError = true;
-      console.log(action);
     },
     toggleCheckedPrayer: (state, action: PayloadAction<Prayer>) => {
       const id = action.payload.id;
@@ -43,11 +42,9 @@ export const prayersSlice = createSlice({
     toggleCheckedPrayerFailure: (state, action) => {
       state.isError = true;
       state.isLoading = false;
-      console.log(action);
     },
     createPrayer: (state, action) => {
       state.isLoading = true;
-      console.log(action);
     },
     createPrayerSuccess: state => {
       state.isLoading = false;
@@ -55,11 +52,9 @@ export const prayersSlice = createSlice({
     createPrayerFailure: (state, action) => {
       state.isError = true;
       state.isLoading = false;
-      console.log(action);
     },
     deletePrayer: (state, action) => {
       state.isLoading = true;
-      console.log(action);
     },
     deletePrayerSuccess: state => {
       state.isLoading = false;
@@ -67,7 +62,6 @@ export const prayersSlice = createSlice({
     deletePrayerFailure: (state, action) => {
       state.isError = true;
       state.isLoading = false;
-      console.log(action);
     },
   },
 });

@@ -32,7 +32,6 @@ function* rootSaga() {
     call(createCommentWatcher),
     call(deleteCommentWatcher),
   ]);
-  console.log('saga called');
 }
 
 export default rootSaga;

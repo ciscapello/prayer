@@ -34,9 +34,7 @@ function* signIn(action: PayloadAction<SignInFormValues>) {
   try {
     const response: AxiosResponse = yield call(signInApi, action.payload);
     yield put(singInSuccess(response.data));
-    console.log('OK', response.data);
   } catch (error) {
-    console.log('NEOK', error);
     yield put(signInFailure(error));
   }
 }

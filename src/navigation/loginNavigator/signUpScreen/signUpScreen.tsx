@@ -45,7 +45,6 @@ export default function SignUpScreen() {
   });
 
   const onPress: SubmitHandler<SignUpFieldValues> = data => {
-    console.log(data);
     dispatch(signUpFetch(data));
     reset();
   };

@@ -36,7 +36,6 @@ export default function CreateColumnModal({
 
   const onSubmit: SubmitHandler<CreateColumnModalFormValues> = data => {
     if (data.title.trim()) {
-      console.log(data);
       reset();
       dispatch(createColumn(data));
       setModalIsShow(false);

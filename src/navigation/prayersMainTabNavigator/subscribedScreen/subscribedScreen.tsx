@@ -5,14 +5,8 @@ import { useAppSelector } from '../../../hooks';
 import { selectNotAnsweredPrayersByColumnId } from '../../../store';
 import { PrayerRow } from '../../../components';
 
-interface SubscribedProps {
-  id: number;
-}
-
-export default function SubscribedScreen({ id }: SubscribedProps) {
+export default function SubscribedScreen() {
   const prayers = useAppSelector(selectNotAnsweredPrayersByColumnId);
-  console.log(prayers);
-  console.log(id);
   return (
     <ScrollView style={styles.prayersContainer}>
       <>

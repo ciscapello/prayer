@@ -59,12 +59,11 @@ function PrayerRow({ prayer }: PrayerRowProps) {
         translateX.value = event.translationX + context.translateX;
       }
     },
-    onEnd: event => {
+    onEnd: () => {
       if (translateX.value < -70) {
         translateX.value = withTiming(-60);
       } else {
         translateX.value = withSpring(0);
-        console.log(event.translationX);
       }
     },
     onFinish: () => {},

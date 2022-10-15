@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SignInResponse, SignUpResponse } from './types';
 
@@ -12,7 +13,6 @@ export const userSlice = createSlice({
   },
   reducers: {
     signUpFetch: (state, action) => {
-      console.log(action);
       state.isLoading = true;
     },
     singUpSuccess: (state, action: PayloadAction<SignUpResponse>) => {
@@ -22,12 +22,10 @@ export const userSlice = createSlice({
       state.username = action.payload.name;
     },
     signUpFailure: (state, action) => {
-      console.log(action);
       state.isLoading = false;
       state.isError = action.payload;
     },
     signInFetch: (state, action) => {
-      console.log(action);
       state.isLoading = true;
     },
     singInSuccess: (state, action: PayloadAction<SignInResponse>) => {
@@ -37,7 +35,6 @@ export const userSlice = createSlice({
       state.username = action.payload.name;
     },
     signInFailure: (state, action) => {
-      console.log(action);
       state.isLoading = false;
       state.isError = action.payload;
     },

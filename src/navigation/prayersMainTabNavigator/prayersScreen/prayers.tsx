@@ -44,7 +44,6 @@ export default function PrayersScreen({ id }: PrayersProps) {
   });
 
   const onSubmit: SubmitHandler<PrayerFieldValue> = data => {
-    console.log(data);
     const { title } = data;
     dispatch(createPrayer({ title, id }));
     reset();

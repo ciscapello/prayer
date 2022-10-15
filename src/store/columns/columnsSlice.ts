@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice } from '@reduxjs/toolkit';
 import { Column } from '../../types';
 
@@ -20,7 +21,6 @@ export const columnsSlice = createSlice({
   initialState,
   reducers: {
     fetchColumns: state => {
-      // console.log(action);
       state.isLoading = true;
     },
     fetchColumnsSuccess: (state, action) => {
@@ -30,17 +30,14 @@ export const columnsSlice = createSlice({
     fetchColumnsFailure: (state, action) => {
       state.isError = true;
       state.isLoading = false;
-      console.log(action);
     },
     createColumn: (state, action) => {
       state.isLoading = true;
-      console.log(action);
     },
     createColumnSuccess: state => {
       state.isLoading = false;
     },
     createColumnFailure: (state, action) => {
-      console.log(action);
       state.isLoading = false;
       state.isError = true;
       state.isLoading = false;
@@ -60,7 +57,6 @@ export const columnsSlice = createSlice({
     },
     updateColumn: (state, action) => {
       state.isLoading = true;
-      console.log(action);
     },
     updateColumnSuccess: state => {
       state.isLoading = false;
@@ -68,7 +64,6 @@ export const columnsSlice = createSlice({
     updateColumnFailure: (state, action) => {
       state.isError = true;
       state.isLoading = false;
-      console.log(action);
     },
   },
 });

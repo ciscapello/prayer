@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice } from '@reduxjs/toolkit';
 import { IComment } from '../../types';
 
@@ -28,11 +29,9 @@ export const commentsSlice = createSlice({
     },
     getAllCommentsFailure: (state, action) => {
       state.isError = true;
-      console.log(action);
     },
     createComment: (state, action) => {
       state.isLoading = true;
-      console.log(action.payload);
     },
     createCommentSuccess: state => {
       state.isLoading = false;
@@ -40,14 +39,12 @@ export const commentsSlice = createSlice({
     createCommentsFailure: (state, action) => {
       state.isError = true;
       state.isLoading = false;
-      console.log(action.payload);
     },
     setActiveMenuId: (state, action) => {
       state.activeCommentId = action.payload;
     },
     deleteComment: (state, action) => {
       state.isLoading = true;
-      console.log(action);
     },
     deleteCommentSuccess: state => {
       state.isLoading = false;
@@ -55,7 +52,6 @@ export const commentsSlice = createSlice({
     deleteCommentFailure: (state, action) => {
       state.isLoading = false;
       state.isError = true;
-      console.log(action);
     },
   },
 });
