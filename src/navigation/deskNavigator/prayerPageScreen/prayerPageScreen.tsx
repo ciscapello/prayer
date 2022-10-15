@@ -23,8 +23,8 @@ import {
   Loading,
 } from '../../../components';
 import { OnePrayerProps } from '../deskNavigator';
-// import People from '../../../shared/assets/pngs/people1.png';
-// import People2 from '../../../shared/assets/pngs/people2.png';
+import People from '../../../shared/assets/pngs/people1.png';
+import People2 from '../../../shared/assets/pngs/people2.png';
 
 interface CommentFieldValue {
   body: string;
@@ -76,14 +76,8 @@ export default function PrayerPageScreen({
         <View style={styles.membersContainer}>
           <Text style={styles.membersTitle}>MEMBERS</Text>
           <View style={styles.images}>
-            <Image
-              style={styles.avatar}
-              source={require('../../../shared/assets/pngs/people1.png')}
-            />
-            <Image
-              style={styles.avatar}
-              source={require('../../../shared/assets/pngs/people2.png')}
-            />
+            <Image style={styles.avatar} source={People} />
+            <Image style={styles.avatar} source={People2} />
             <View style={styles.plusContainer}>
               <Text style={styles.plus}>+</Text>
             </View>

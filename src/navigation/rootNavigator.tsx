@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import DeskNavigation from './deskNavigator/deskNavigator';
 import { useAppSelector } from '../hooks';
 import DeskNavigator from './deskNavigator/deskNavigator';
-import LoginNavigator from './loginNavigator/loginNavigator';
+import GuestNavigator from './guestNavigator/guestNavigator';
 
 export type RootStackParams = {
   LoginNavigation: undefined;
@@ -29,7 +29,7 @@ export default function RootNavigator() {
         ) : (
           <Stack.Screen
             name="LoginNavigation"
-            component={LoginNavigator}
+            component={GuestNavigator}
             options={{ headerShown: false }}
           />
         )}

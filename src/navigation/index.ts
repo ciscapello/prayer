@@ -1,4 +1,4 @@
 export * from './rootNavigator';
 export * from './deskNavigator';
-export * from './loginNavigator';
+export * from './guestNavigator';
 export * from './prayersMainTabNavigator';

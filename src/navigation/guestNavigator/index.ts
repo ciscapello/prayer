@@ -1,3 +1,3 @@
 export * from './signInScreen';
 export * from './signUpScreen';
-export * from './loginNavigator';
+export * from './guestNavigator';

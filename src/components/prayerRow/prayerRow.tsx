@@ -135,8 +135,14 @@ function PrayerRow({ prayer }: PrayerRowProps) {
                 </Text>
               </TouchableOpacity>
               <View style={styles.iconBox}>
-                <User height={30} width={30} fill={'#72A8BC'} />
-                <PrayerIcon width={30} height={30} fill={'#72A8BC'} />
+                <View style={styles.icon}>
+                  <User height={24} width={24} fill={'#72A8BC'} />
+                  <Text style={styles.iconCounter}>3</Text>
+                </View>
+                <View style={styles.icon}>
+                  <PrayerIcon width={24} height={24} fill={'#72A8BC'} />
+                  <Text style={styles.iconCounter}>14</Text>
+                </View>
               </View>
             </View>
           </View>
@@ -212,5 +218,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  icon: {
+    marginRight: 15,
+    flexDirection: 'row',
+  },
+  iconCounter: {
+    fontSize: 12,
+    alignSelf: 'center',
   },
 });

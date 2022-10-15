@@ -15,7 +15,7 @@ import {
   View,
 } from 'react-native';
 import { useAppDispatch } from '../../../hooks';
-import { LoginStackParams } from '../loginNavigator';
+import { LoginStackParams } from '../guestNavigator';
 import { signUpFetch } from '../../../store';
 import { Color, emailValidation } from '../../../utils';
 import { Loading } from '../../../components';

@@ -11,7 +11,7 @@ export type LoginStackParams = {
 
 const Stack = createNativeStackNavigator<LoginStackParams>();
 
-export default function LoginNavigator() {
+export default function GuestNavigator() {
   return (
     <Stack.Navigator initialRouteName="SignUp">
       <Stack.Screen
