@@ -8,7 +8,6 @@ import {
   View,
 } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { PrayerRow, Loading } from '../../components';
 import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import {
   createPrayer,
@@ -17,6 +16,8 @@ import {
   selectAnsweredPrayersByColumnId,
 } from '../../store';
 import { Color } from '../../utils';
+import { PrayerRow } from '../prayerRow';
+import { Loading } from '../loading';
 
 interface PrayersProps {
   id: number;

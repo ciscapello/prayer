@@ -14,15 +14,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { OnePrayerProps } from '../../navigation';
 import { Message } from '../../shared/assets/svgs';
 import { createComment, selectCommentsOfPrayer } from '../../store';
-import {
-  Comment,
-  Loading,
-  PrayerCounter,
-  PrayerHeader,
-} from '../../components';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Color } from '../../utils';
+import { PrayerHeader } from '../prayerHeader';
+import { PrayerCounter } from '../prayerCounter';
+import { Comment } from '../comment';
+import { Loading } from '../loading';
 
 interface CommentFieldValue {
   body: string;
