@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SignUp, SignIn } from '../components';
+import { SignInScreen } from './signInScreen';
+import { SignUpScreen } from './signUpScreen';
 
 export type LoginStackParams = {
   SignUp: undefined;
@@ -10,15 +11,19 @@ export type LoginStackParams = {
 
 const Stack = createNativeStackNavigator<LoginStackParams>();
 
-export default function LoginNavigation() {
+export default function LoginNavigator() {
   return (
     <Stack.Navigator initialRouteName="SignUp">
       <Stack.Screen
         name="SignUp"
-        component={SignUp}
+        component={SignUpScreen}
         options={{ title: 'Welcome', headerTitleAlign: 'center' }}
       />
-      <Stack.Screen name="SignIn" component={SignIn} options={{ title: '' }} />
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ title: '' }}
+      />
     </Stack.Navigator>
   );
 }

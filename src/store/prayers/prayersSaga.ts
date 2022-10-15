@@ -11,7 +11,7 @@ import {
   toggleCheckedPrayerFailure,
 } from './prayersSlice';
 import Api from '../../api';
-import { Prayer } from '../../types/index';
+import { Prayer } from '../../types';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 const getAllPrayersApi = () => {

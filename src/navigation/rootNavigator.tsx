@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginNavigation from './loginNavigation';
-import DeskNavigation from './deskNavigation';
+// import LoginNavigation from './loginNavigator/loginNavigator';
+// import DeskNavigation from './deskNavigator/deskNavigator';
 import { useAppSelector } from '../hooks';
+import DeskNavigator from './deskNavigator/deskNavigator';
+import LoginNavigator from './loginNavigator/loginNavigator';
 
 export type RootStackParams = {
   LoginNavigation: undefined;
@@ -12,7 +14,7 @@ export type RootStackParams = {
 
 const Stack = createNativeStackNavigator<RootStackParams>();
 
-export default function RootNavigation() {
+export default function RootNavigator() {
   const { isLogin } = useAppSelector(state => state.user);
 
   return (
@@ -21,13 +23,13 @@ export default function RootNavigation() {
         {isLogin ? (
           <Stack.Screen
             name="DeskNavigation"
-            component={DeskNavigation}
+            component={DeskNavigator}
             options={{ headerShown: false }}
           />
         ) : (
           <Stack.Screen
             name="LoginNavigation"
-            component={LoginNavigation}
+            component={LoginNavigator}
             options={{ headerShown: false }}
           />
         )}

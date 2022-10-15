@@ -3,11 +3,13 @@ import {
   createMaterialTopTabNavigator,
   MaterialTopTabScreenProps,
 } from '@react-navigation/material-top-tabs';
-import { Prayers, Subscribed, UpdateColumnModal } from '../components';
-import { PrayersMainProps } from './deskNavigation';
+import { UpdateColumnModal } from '../../components';
+import { PrayersMainProps } from '../deskNavigator/deskNavigator';
 import { TouchableOpacity } from 'react-native';
-import { Settings } from '../shared/assets/svgs';
-import { Color } from '../utils';
+import { Settings } from '../../shared/assets/svgs';
+import { Color } from '../../utils';
+import PrayersScreen from './prayersScreen/prayers';
+import { SubscribedScreen } from './subscribedScreen';
 
 export type TabNavigationParams = {
   Prayers: undefined;
@@ -26,7 +28,7 @@ export type SubscribedTabScreenProps = MaterialTopTabScreenProps<
   'Subscribed'
 >;
 
-export default function PrayersMainTabNavigation({
+export default function PrayersMainTabNavigator({
   route,
   navigation,
 }: PrayersMainProps) {
@@ -58,12 +60,12 @@ export default function PrayersMainTabNavigation({
         <Tab.Screen
           options={{ title: 'MY PRAYERS' }}
           name="Prayers"
-          children={() => <Prayers id={route.params.id} />}
+          children={() => <PrayersScreen id={route.params.id} />}
         />
         <Tab.Screen
           options={{ title: 'SUBSCRIBED' }}
           name="Subscribed"
-          children={() => <Subscribed id={route.params.id} />}
+          children={() => <SubscribedScreen id={route.params.id} />}
         />
       </Tab.Navigator>
     </>

@@ -8,14 +8,14 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import { CreateColumnModal } from '../createColumnModal';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAllPrayers, getAllComments, fetchColumns } from '../../store';
-import { Color } from '../../utils';
-import { DeskStackParams } from '../../navigation';
-import { Loading } from '../loading';
+import { CreateColumnModal } from '../../../components/createColumnModal';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { getAllPrayers, getAllComments, fetchColumns } from '../../../store';
+import { Color } from '../../../utils';
+import { Loading } from '../../../components/loading';
+import { DeskStackParams } from '../deskNavigator';
 
-export default function Desk() {
+export default function DeskScreen() {
   const dispatch = useAppDispatch();
   const columns = useAppSelector(state => state.columns.columns);
   const navigation =

@@ -7,17 +7,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import {
   createPrayer,
   setActiveColumnId,
   selectNotAnsweredPrayersByColumnId,
   selectAnsweredPrayersByColumnId,
-} from '../../store';
-import { Color } from '../../utils';
-import { PrayerRow } from '../prayerRow';
-import { Loading } from '../loading';
+} from '../../../store';
+import { Color } from '../../../utils';
+import { PrayerRow } from '../../../components/prayerRow';
+import { Loading } from '../../../components/loading';
 
 interface PrayersProps {
   id: number;
@@ -27,7 +27,7 @@ interface PrayerFieldValue {
   title: string;
 }
 
-export default function Prayers({ id }: PrayersProps) {
+export default function PrayersScreen({ id }: PrayersProps) {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setActiveColumnId(id));

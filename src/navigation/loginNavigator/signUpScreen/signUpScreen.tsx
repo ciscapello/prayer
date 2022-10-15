@@ -14,19 +14,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { LoginStackParams } from '../../navigation/loginNavigation';
-import { useAppDispatch } from '../../hooks';
-import { signInFetch } from '../../store';
-import { Loading } from '../loading';
-import { Color, emailValidation } from '../../utils';
+import { useAppDispatch } from '../../../hooks';
+import { LoginStackParams } from '../loginNavigator';
+import { signUpFetch } from '../../../store';
+import { Color, emailValidation } from '../../../utils';
+import { Loading } from '../../../components';
 
-export interface SignInFormValues {
+export interface SignUpFieldValues {
+  name: string;
   email: string;
   password: string;
 }
 
-export default function SignIn() {
+export default function SignUpScreen() {
   const dispatch = useAppDispatch();
+
   const navigation =
     useNavigation<NativeStackNavigationProp<LoginStackParams>>();
   const {
@@ -34,15 +36,17 @@ export default function SignIn() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<SignInFormValues>({
+  } = useForm<SignUpFieldValues>({
     defaultValues: {
+      name: '',
       email: '',
       password: '',
     },
   });
 
-  const onSubmit: SubmitHandler<SignInFormValues> = data => {
-    dispatch(signInFetch(data));
+  const onPress: SubmitHandler<SignUpFieldValues> = data => {
+    console.log(data);
+    dispatch(signUpFetch(data));
     reset();
   };
 
@@ -51,14 +55,28 @@ export default function SignIn() {
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingView behavior="padding">
           <View style={styles.wrapper}>
-            <Text style={styles.title}>Sign in</Text>
+            <Text style={styles.title}>Sign up</Text>
+            <Controller
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  placeholder="Name"
+                  onChangeText={val => onChange(val)}
+                  value={value}
+                  autoCapitalize="none"
+                />
+              )}
+              name="name"
+              rules={{ required: true }}
+            />
+            {errors.name && <Text style={styles.error}>Name is required</Text>}
             <Controller
               control={control}
               render={({ field: { onChange, value } }) => (
                 <TextInput
                   style={styles.input}
                   placeholder="Email"
-                  textContentType="emailAddress"
                   onChangeText={val => onChange(val)}
                   value={value}
                   autoCapitalize="none"
@@ -79,9 +97,9 @@ export default function SignIn() {
                 <TextInput
                   style={styles.input}
                   placeholder="Password"
+                  onChange={onChange}
                   onChangeText={val => onChange(val)}
                   value={value}
-                  textContentType="password"
                   autoCapitalize="none"
                 />
               )}
@@ -95,19 +113,24 @@ export default function SignIn() {
             )}
             <TouchableOpacity
               style={styles.button}
-              onPress={handleSubmit(onSubmit)}>
+              onPress={handleSubmit(onPress)}>
               <Text style={styles.buttonText}>Done</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.signIn}>
-            <Text style={styles.signInText}>Have no account?</Text>
+          <View style={styles.signUp}>
+            <Text style={styles.signInText}>
+              If you already have an account
+            </Text>
             {Platform.OS === 'ios' ? (
-              <Button onPress={() => navigation.goBack()} title="Sign up" />
+              <Button
+                onPress={() => navigation.navigate('SignIn')}
+                title="Sign in"
+              />
             ) : (
               <Pressable
                 style={styles.androidButton}
-                onPress={() => navigation.navigate('SignUp')}>
-                <Text style={styles.androidButtonText}>Sign up</Text>
+                onPress={() => navigation.navigate('SignIn')}>
+                <Text style={styles.androidButtonText}>Sign in</Text>
               </Pressable>
             )}
           </View>
@@ -161,8 +184,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
-  signIn: {
+  signUp: {
     marginTop: 30,
+    alignItems: 'center',
   },
   signInText: {
     color: 'gray',

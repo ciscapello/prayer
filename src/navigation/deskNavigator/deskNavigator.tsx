@@ -4,12 +4,13 @@ import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import { Desk, PrayerPage } from '../components';
-import PrayersMain from './prayersMainTabNavigation';
-import { Prayer } from '../types';
+import { DeskScreen } from './deskScreen';
+import { Prayer } from '../../types';
+import { PrayerPageScreen } from './prayerPageScreen';
+import PrayersMainTabNavigator from '../prayersMainTabNavigator/prayersMainTabNavigator';
 
 export type DeskStackParams = {
-  Desk: undefined;
+  DeskScreen: undefined;
   PrayersMain: { id: number; title: string };
   OnePrayer: { prayer: Prayer };
 };
@@ -31,12 +32,12 @@ export type PrayersScreenNavigationProps = NativeStackNavigationProp<
 
 const Stack = createNativeStackNavigator<DeskStackParams>();
 
-export default function DeskNavigation() {
+export default function DeskNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Desk"
-        component={Desk}
+        name="DeskScreen"
+        component={DeskScreen}
         options={{
           title: 'My Desk',
           headerTitleAlign: 'center',
@@ -44,13 +45,13 @@ export default function DeskNavigation() {
       />
       <Stack.Screen
         name="PrayersMain"
-        component={PrayersMain}
+        component={PrayersMainTabNavigator}
         options={{
           headerShadowVisible: false,
           headerTitleAlign: 'center',
         }}
       />
-      <Stack.Screen name="OnePrayer" component={PrayerPage} />
+      <Stack.Screen name="OnePrayer" component={PrayerPageScreen} />
     </Stack.Navigator>
   );
 }

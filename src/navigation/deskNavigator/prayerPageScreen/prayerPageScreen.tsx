@@ -10,23 +10,30 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { OnePrayerProps } from '../../navigation';
-import { Message } from '../../shared/assets/svgs';
-import { createComment, selectCommentsOfPrayer } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { Message } from '../../../shared/assets/svgs';
+import { createComment, selectCommentsOfPrayer } from '../../../store';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Color } from '../../utils';
-import { PrayerHeader } from '../prayerHeader';
-import { PrayerCounter } from '../prayerCounter';
-import { Comment } from '../comment';
-import { Loading } from '../loading';
+import { Color } from '../../../utils';
+import {
+  PrayerHeader,
+  PrayerCounter,
+  Comment,
+  Loading,
+} from '../../../components';
+import { OnePrayerProps } from '../deskNavigator';
+// import People from '../../../shared/assets/pngs/people1.png';
+// import People2 from '../../../shared/assets/pngs/people2.png';
 
 interface CommentFieldValue {
   body: string;
 }
 
-export default function PrayerPage({ route, navigation }: OnePrayerProps) {
+export default function PrayerPageScreen({
+  route,
+  navigation,
+}: OnePrayerProps) {
   const dispatch = useAppDispatch();
   let comments = useAppSelector(selectCommentsOfPrayer);
 
@@ -71,11 +78,11 @@ export default function PrayerPage({ route, navigation }: OnePrayerProps) {
           <View style={styles.images}>
             <Image
               style={styles.avatar}
-              source={require('../../shared/assets/pngs/people1.png')}
+              source={require('../../../shared/assets/pngs/people1.png')}
             />
             <Image
               style={styles.avatar}
-              source={require('../../shared/assets/pngs/people2.png')}
+              source={require('../../../shared/assets/pngs/people2.png')}
             />
             <View style={styles.plusContainer}>
               <Text style={styles.plus}>+</Text>
