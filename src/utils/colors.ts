@@ -1,0 +1,9 @@
+export const enum Color {
+  PLATINUM = '#E5E5E5',
+  SPANISH_GRAY = '#9C9C9C',
+  KHAKI = '#BFB393',
+  RICH_BRILLIANT_LAVENDER = '#A2FF94',
+  DARK_LIVER = '#474B51',
+  MOONSTONE_BLUE = '#72A8BC',
+  ROSE_VALE = '#AC5253',
+}
